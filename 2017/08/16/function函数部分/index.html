@@ -164,7 +164,7 @@
         
           <div class="post-category">
             
-              <a href="/categories/github/">github</a>
+              <a href="/categories/MickeyAj/">MickeyAj</a>
             
           </div>
         
@@ -176,14 +176,15 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript函数"><span class="toc-text">JavaScript函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript函数"><span class="toc-text">JavaScript函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数调用"><span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回函数的函数"><span class="toc-text">返回函数的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建匿名函数"><span class="toc-text">创建匿名函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#js创建动态函数"><span class="toc-text">js创建动态函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法和函数的区别"><span class="toc-text">方法和函数的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS全局函数"><span class="toc-text">JS全局函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数的几个作用"><span class="toc-text">函数的几个作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为值的函数"><span class="toc-text">作为值的函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高阶函数"><span class="toc-text">高阶函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-和apply"><span class="toc-text">call()和apply()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数里面的参数-arguments"><span class="toc-text">函数里面的参数(arguments)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#递归函数"><span class="toc-text">递归函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有变量和私有函数"><span class="toc-text">私有变量和私有函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态变量和函数"><span class="toc-text">静态变量和函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例变量和函数"><span class="toc-text">实例变量和函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype属性"><span class="toc-text">prototype属性</span></a></li></ol></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念<hr></h3><ul>
+        <p>详细介绍javascript中函数的使用<br><a id="more"></a></p>
+<h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念<hr></h3><ul>
 <li>函数是由事件驱动的或者当它被调用执行的可复用的代码块</li>
 </ul>
 <p><code>js</code>支持两种函数：</p>
@@ -192,15 +193,14 @@
 <li>自己创建的函数</li>
 </ul>
 <p>在<code>js</code>函数内部声明的变量(使用<code>var</code>)是局部变量，只能在函数内部访问它<br>你可以在不同的函数声明相同的变量名称，因为它们是局部变量，两个不会相互影响</p>
-<p>###函数调用<hr><br><a id="more"></a><br>四种调用方式：</p>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用<hr></h3><p>四种调用方式：</p>
 <ul>
 <li>作为函数</li>
 <li>作为方法</li>
 <li>作为构造函数</li>
 <li>通过<code>call()</code>和<code>apply()</code></li>
 </ul>
-<p>###返回函数的函数<hr></p>
-<ol>
+<h3 id="返回函数的函数"><a href="#返回函数的函数" class="headerlink" title="返回函数的函数"></a>返回函数的函数<hr></h3><ol>
 <li>当函数无明确返回值时，返回<code>undefined</code></li>
 <li>当函数结束有<code>return</code>,返回什么就是什么</li>
 </ol>
@@ -221,8 +221,7 @@ var fn2 = fn()();//在加一个括号表示立即执行函数
 </code></pre><p><code>js</code>函数传递参数都是按照值传递。</p>
 <p><font color="red">引用类型</font>：</p>
 <p><code>js</code>中引用类型都是存储在堆内存中的对象，变量中保存的实际只是一个指针，这个指针执行内存中的另一个位置，这个位置保存对象。</p>
-<p>###创建匿名函数<hr></p>
-<pre><code>function(){
+<h3 id="创建匿名函数"><a href="#创建匿名函数" class="headerlink" title="创建匿名函数"></a>创建匿名函数<hr></h3><pre><code>function(){
     console.log(&apos;我是一个没有名字的函数&apos;)
 }()
 </code></pre><p>这种函数的好处是在我们只使用一次，省的在去定义一个函数名，避免命名冲突，<code>js</code>中没有命名空间的概念，因此有两个相同的函数名字，<code>js</code>会执行后面那个函数，因为<code>js</code>解析代码是一段一段的执行，他会按照最后出现的执行</p>
@@ -244,7 +243,7 @@ console.log(fn);//输出hi
 })(10)
 </code></pre></li>
 </ul>
-<p>###<code>js</code>创建动态函数<hr><br><code>js</code>支持创建动态函数，动态函数必须用<code>Function</code>对象来定义(Function是<code>js</code>中的一个对象，他是引用类型，是固定不变的，对象中的Function中的’F’必须大小）</p>
+<h3 id="js创建动态函数"><a href="#js创建动态函数" class="headerlink" title="js创建动态函数"></a><code>js</code>创建动态函数<hr></h3><p><code>js</code>支持创建动态函数，动态函数必须用<code>Function</code>对象来定义(Function是<code>js</code>中的一个对象，他是引用类型，是固定不变的，对象中的Function中的’F’必须大小）</p>
 <p>创建动态函数的基本格式：<code>var 变量名 = new Function(&#39;参数1&#39;,&#39;参数2&#39;，&#39;参数n&#39;,&#39;执行语句&#39;)</code></p>
 <pre><code>var fn = new Function(&apos;x&apos;,&apos;y&apos;,&apos;var sum ; sum = x + y ; return sum;&apos;)
 console.log(fn(2,3));//输出5
@@ -258,7 +257,7 @@ var fn = function(x,y){
 console.log(fn(2,3));//输出5
 //第一个函数是动态函数，第二个函数是静态函数
 </code></pre><p><strong><em>一般情况下我们不使用动态函数</em></strong></p>
-<p>###回调函数<hr><br>回调函数是一个函数的调用的过程，简单理解就是一个函数里面传参数，传的参数是一个函数，第一个函数执行完成后再去执行第二个函数。</p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数<hr></h3><p>回调函数是一个函数的调用的过程，简单理解就是一个函数里面传参数，传的参数是一个函数，第一个函数执行完成后再去执行第二个函数。</p>
 <pre><code>function fn(fn1){
     console.log(&apos;aa&apos;)；
     fn1();
@@ -269,8 +268,7 @@ function fn1(){
 fn(fn1);
 //先执行fn函数，fn函数执行完成后再执行fn1函数
 //这里fn1函数就是回调函数
-</code></pre><p>###方法和函数的区别<hr></p>
-<pre><code>var arr = [1,2,3,4,5]
+</code></pre><h3 id="方法和函数的区别"><a href="#方法和函数的区别" class="headerlink" title="方法和函数的区别"></a>方法和函数的区别<hr></h3><pre><code>var arr = [1,2,3,4,5]
 var a =12;   // 变量：自由的
 arr.a= 5;     //属性：属于一个对象
 function show()     //函数：自由的
@@ -282,10 +280,9 @@ arr.fn = function()   //方法：属于一个对象
      alert(‘b’);
 }
 </code></pre><p><strong><em>其实方法就是函数，只不过方法是所属的对象</em></strong></p>
-<p>###<code>JS</code>全局函数<hr><br>js中有7中全局函数：</p>
+<h3 id="JS全局函数"><a href="#JS全局函数" class="headerlink" title="JS全局函数"></a><code>JS</code>全局函数<hr></h3><p>js中有7中全局函数：</p>
 <pre><code>escape( )、eval( )、isFinite( )、isNaN( )、parseFloat( )、parseInt( )、unescape( )
-</code></pre><p>###函数的几个作用<hr></p>
-<ul>
+</code></pre><h3 id="函数的几个作用"><a href="#函数的几个作用" class="headerlink" title="函数的几个作用"></a>函数的几个作用<hr></h3><ul>
 <li><p>作为一个类构造器使用</p>
 <pre><code>function Class(){};
 Class.prototype = {};
@@ -311,8 +308,7 @@ per2.age;//输出20
 </ul>
 <p>可以使用 new 运算符结合像 Object()、Date() 和 Function() 这样的预定义的构造函数来创建对象并对其初始化。面向对象的编程其强有力的特征是定义自定义构造函数以创建脚本中使用的自定义对象的能力。创建了自定义的构造函数，这样就可以创建具有已定义属性的对象。</p>
 <p><strong><em>优缺点：</em></strong><br>使用构造器函数的优点是，它可以根据参数来构造不同的对象。 缺点是构造时每个实例对象都会生成重复调用对象的方法，造成了内存的浪费</p>
-<p>###作为值的函数<hr></p>
-<ul>
+<h3 id="作为值的函数"><a href="#作为值的函数" class="headerlink" title="作为值的函数"></a>作为值的函数<hr></h3><ul>
 <li><p><code>JS</code>中函数是一种语法，也是一个值，我们可以把函数赋值给一个变量</p>
 <p>  function fn(x,y){</p>
 <pre><code>return x * y
@@ -326,13 +322,13 @@ var obj = {};//我们这里定义了一个空对象obj
 obj.seque = fn(2.3);//我们给空对象obj动态赋值了一个属性为seque
 </code></pre></li>
 </ul>
-<p>###高阶函数<hr><br>这里的高阶函数可不是高数里的那个高阶函数，所谓高阶函数就是操作函数的函数，它接收一个或多个函数作为参数，并返回新函数</p>
-<p>###call()和apply()<hr><br>call()函数里面第一个参数是执行上下文，第二个是传递的参数。。。可以传递多个参数</p>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数<hr></h3><p>这里的高阶函数可不是高数里的那个高阶函数，所谓高阶函数就是操作函数的函数，它接收一个或多个函数作为参数，并返回新函数</p>
+<h3 id="call-和apply"><a href="#call-和apply" class="headerlink" title="call()和apply()"></a>call()和apply()<hr></h3><p>call()函数里面第一个参数是执行上下文，第二个是传递的参数。。。可以传递多个参数</p>
 <pre><code>function.call(this,1,2,3);
 </code></pre><p>apply()函数里面第一个参数是执行上下文，第二个是一个数组对象。</p>
 <pre><code>function.apply(this,[1,2,3]);
 </code></pre><p><strong><em>这部分后面还要完善，这里只是简单的介绍一下 add 2016.8.12</em></strong></p>
-<p>###函数里面的参数(arguments)<hr><br>当函数被调用的时候，会得到一个参数数组，那就是<code>arguments</code>数组，通过它，函数可以访问所有它被调用时传递给它的参数</p>
+<h3 id="函数里面的参数-arguments"><a href="#函数里面的参数-arguments" class="headerlink" title="函数里面的参数(arguments)"></a>函数里面的参数(arguments)<hr></h3><p>当函数被调用的时候，会得到一个参数数组，那就是<code>arguments</code>数组，通过它，函数可以访问所有它被调用时传递给它的参数</p>
 <pre><code>var sum = function(){
     var i ,sum =0;
     for(i = 0;i&lt;arguments.length;i+=1){
@@ -343,9 +339,8 @@ obj.seque = fn(2.3);//我们给空对象obj动态赋值了一个属性为seque
    console.log(sum(4,5,23,13,35,46,-10));//116
 </code></pre><p><strong>实际上，arguments并不是一个真正的数组，它只是一个类数组的对象，它拥有一个length属性，但他缺少所有数组的方法。另外，arguments对象的长度是由传入的参数个数决定的，而不是由定义函数时的命名参数的个数决定的</strong></p>
 <p><strong>函数在定义或者声明的时候，所有的参数都是形参，因此，我们可以根据实际情况来命名参数，函数也只有在被调用时才会传入实参。而每个函数在被调用时都会自动取得两个特殊变量：this 和 arguments</strong></p>
-<p>###递归函数<hr><br>函数的递归，即一个函数在通过名字调用自身的情况下构成的</p>
-<p>###私有变量和私有函数<hr></p>
-<ul>
+<h3 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数<hr></h3><p>函数的递归，即一个函数在通过名字调用自身的情况下构成的</p>
+<h3 id="私有变量和私有函数"><a href="#私有变量和私有函数" class="headerlink" title="私有变量和私有函数"></a>私有变量和私有函数<hr></h3><ul>
 <li><p>定义在函数内部的变量和函数，如果不对外提供接口，外面是访问不到这些函数和变量的，这就叫做私有变量和私有函数</p>
 <pre><code>function Fn(){
     var a = 10;//私有变量
@@ -354,8 +349,7 @@ obj.seque = fn(2.3);//我们给空对象obj动态赋值了一个属性为seque
 var newFn = new Fn();
 console.log(newFn.a);//undefined
 console.log(newFn.fn1);//undefined
-</code></pre><p>###静态变量和函数<hr></p>
-</li>
+</code></pre><h3 id="静态变量和函数"><a href="#静态变量和函数" class="headerlink" title="静态变量和函数"></a>静态变量和函数<hr></h3></li>
 </ul>
 <ul>
 <li><p>当定义一个函数后通过点号 “.”为其添加的属性和函数，通过对象本身仍然可以访问得到，但是其实例却访问不到，这样的变量和函数分别被称为静态变量和静态函数。</p>
@@ -370,8 +364,7 @@ alert(typeof Obj.fn)//function
 var t = new Obj();
 alert(t.name);//undefined
 alert(typeof t.fn);//undefined
-</code></pre><p>###实例变量和函数<hr></p>
-</li>
+</code></pre><h3 id="实例变量和函数"><a href="#实例变量和函数" class="headerlink" title="实例变量和函数"></a>实例变量和函数<hr></h3></li>
 <li><p>在面向对象编程中除了一些库函数我们还是希望在对象定义的时候同时定义一些属性和方法，实例化后可以访问，js也能做到这样</p>
 <pre><code>function Box(){
         this.a=[]; //实例变量
@@ -407,7 +400,7 @@ alert(typeof t.fn);//undefined
         console.log(typeof box2.fn); //function
 </code></pre><p><strong>在box1中修改了a和fn，而在box2中没有改变，由于数组和函数都是对象，是引用类型，这就说明box1中的属性和方法与box2中的属性与方法虽然同名但却不是一个引用，而是对Box对象定义的属性和方法的一个复制。</strong></p>
 <p><strong>这个对属性来说没有什么问题，但是对于方法来说问题就很大了，因为方法都是在做完全一样的功能，但是却又两份复制，如果一个函数对象有上千和实例方法，那么它的每个实例都要保持一份上千个方法的复制，这显然是不科学的，这可肿么办呢，prototype应运而生。</strong></p>
-<p>###prototype属性<hr><br><strong>基本概念：</strong></p>
+<h3 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性<hr></h3><p><strong>基本概念：</strong></p>
 <p>我们创建的每个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。那么，prototype就是通过调用构造函数而创建的那个对象实例的原型对象。</p>
 <p>使用原型的好处是可以让对象实例共享它所包含的属性和方法。也就是说，不必在构造函数中添加定义对象信息，而是可以直接将这些信息添加到原型中。使用构造函数的主要问题就是每个方法都要在每个实例中创建一遍。</p>
 <p>在JavaScript中,一共有两种类型的值,原始值和对象值。每个对象都有一个内部属性 prototype ,我们通常称之为原型。原型的值可以是一个对象,也可以是null。如果它的值是一个对象，则这个对象也一定有自己的原型。这样就形成了一条线性的链，我们称之为原型链</p>
