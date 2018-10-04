@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      TypeScript入门教程(二) - 变量声明 | anjiecc
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>anjiecc</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>TypeScript入门教程(二) - 变量声明</h2>
+  <p class="post-date">2018-10-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>在es5中js声明变量是通过<code>var</code>关键字进行变量声明，在es6中我们可以通过<code>let</code>,<code>const</code>两个关键字来进行声明，typescript中支持<code>let</code>,<code>const</code>进行声明变量<br><a id="more"></a></p>
+<h3 id="Var"><a href="#Var" class="headerlink" title="Var"></a>Var</h3><p>在过去的js中(es5之前包括es5)我们声明变量是通过<code>var</code>来声明一个变量，但是var声明变量也有它不足的地方，我们接下来会详细介绍它</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'mickey'</span></span><br></pre></td></tr></table></figure>
+<p>通过上面的方式我们就声明了一个变量<code>a</code>类型是字符串值为<code>&#39;mickey&#39;</code><br>我们也可以在函数中声明变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> age = <span class="number">26</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你是像<code>Java</code>,<code>C</code>等其他语言开发人员会对js中的var声明的变量作用域看起来很奇怪</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params">flag: <span class="built_in">boolean</span></span>): <span class="title">void</span> | <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(flag) &#123;</span><br><span class="line">        <span class="keyword">var</span> num = <span class="number">26</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line">&#125;</span><br><span class="line">fn1(<span class="literal">false</span>) <span class="comment">// return undefined</span></span><br><span class="line">fn1(<span class="literal">true</span>) <span class="comment">// 26</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子中，变量<code>num</code>声明在<code>if</code>语句中，但是我们在语句的外面还是可以访问它，这是因为<code>var</code>声明可以包含在函数，模块，命名空间和全局作用域内部任何位置被访问，js通过var声明的变量是没有块级作用域</p>
+<p>我们在看一个例子</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)&#123; </span><br><span class="line">   a[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里我们点击a标签会输入 7</span></span><br><span class="line"><span class="comment">// 因为循环创建了i变量后面会直接覆盖前面的变量值</span></span><br></pre></td></tr></table></figure>
+<p>为了解决上面的问题我们可以通过闭包来解决</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i =<span class="number">0</span>; i&lt;a.length; i++)&#123; </span><br><span class="line">   a[i].onclick = (<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(i);&#125;</span><br><span class="line">   &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一种方式通过es6中的<code>let</code>来解决,接下来我们详细介绍<code>let</code></p>
+<h3 id="Let"><a href="#Let" class="headerlink" title="Let"></a>Let</h3><p>使用<code>let</code>和之前<code>var</code>声明变量一样</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">'mickey'</span></span><br><span class="line"><span class="keyword">let</span> b: <span class="built_in">number</span> = <span class="number">26</span></span><br></pre></td></tr></table></figure>
+<p>我们通过<code>let</code>声明的方式解决上面的问题</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++)&#123; </span><br><span class="line">   a[i].onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里我们点击a标签会输入 0,1,2,3,4,5,6,7</span></span><br></pre></td></tr></table></figure>
+<p>如果你想了解比较详细<code>let</code>如果使用和新的特性你可以参考<a href="http://es6.ruanyifeng.com/#docs/let" target="_blank" rel="noopener">ECMAScript 6 入门-阮一峰</a></p>
+<h3 id="Const"><a href="#Const" class="headerlink" title="Const"></a>Const</h3><p>使用<code>Const</code>和之前<code>var</code>声明变量一样</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="string">'mickey'</span></span><br><span class="line"><span class="keyword">const</span> b: <span class="built_in">number</span> = <span class="number">26</span></span><br></pre></td></tr></table></figure>
+<p>如果你想了解比较详细<code>Const</code>如果使用和新的特性你可以参考<a href="http://es6.ruanyifeng.com/#docs/let" target="_blank" rel="noopener">ECMAScript 6 入门-阮一峰</a></p>
+<h3 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h3><ul>
+<li>数组解构</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> input = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> [first, second] = input;</span><br><span class="line"><span class="built_in">console</span>.log(first); <span class="comment">// outputs 1</span></span><br><span class="line"><span class="built_in">console</span>.log(second); <span class="comment">// outputs 2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">[first, second]: [<span class="built_in">number</span>, <span class="built_in">number</span>]</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(first);</span><br><span class="line">    <span class="built_in">console</span>.log(second);</span><br><span class="line">&#125;</span><br><span class="line">f(input);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [first, ...rest] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="built_in">console</span>.log(first); <span class="comment">// outputs 1</span></span><br><span class="line"><span class="built_in">console</span>.log(rest); <span class="comment">// outputs [ 2, 3, 4 ]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>对象解构</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">    a: <span class="string">"foo"</span>,</span><br><span class="line">    b: <span class="number">12</span>,</span><br><span class="line">    c: <span class="string">"bar"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> &#123; a, b &#125; = o;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(&#123; a, b &#125; = &#123; a: <span class="string">"baz"</span>, b: <span class="number">101</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>上面简单的介绍了数组解构和对象解构，如果你想详情了解还是推荐你去<a href="http://es6.ruanyifeng.com/#docs/let" target="_blank" rel="noopener">ECMAScript 6 入门-阮一峰</a>这个对ES6进行非常详细的介绍，相信你会学到很多ES6中所有新特性</p>
+<p>上面我们介绍了<code>TypeScript</code>的变量声明，第三节我们将介绍接口</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#TypeScript" >
+    <span class="tag-code">TypeScript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/10/04/typescript入门教程(一) 基础类型/">
+        <span class="nav-arrow">← </span>
+        
+          TypeScript入门教程(一) - 基础类型
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Var"><span class="toc-nav-text">Var</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Let"><span class="toc-nav-text">Let</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Const"><span class="toc-nav-text">Const</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解构"><span class="toc-nav-text">解构</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/10/05/typescript入门教程(二) - 变量声明/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "TypeScript入门教程(二) - 变量声明",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/05/typescript入门教程(二) - 变量声明/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
