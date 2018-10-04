@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      js原型继承五条基本原则 | anjiecc
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>anjiecc</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>js原型继承五条基本原则</h2>
+  <p class="post-date">2017-08-23</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>js中的原型继承，遵守5个基本原则：</p>
+<ul>
+<li>所有的数据都是对象</li>
+<li>要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</li>
+<li>对象会记住它的原型</li>
+<li>如果对象无法响应某个请求，它会把这个请求委托给它自己的原型</li>
+</ul>
+<p>接下来我们将详细讲解这个5个基本原则…..</p>
+<a id="more"></a>
+<h3 id="所有的数据都是对象"><a href="#所有的数据都是对象" class="headerlink" title="所有的数据都是对象"></a>所有的数据都是对象</h3><p>js在设计的时候引入了java两套类型机制：<strong>基本类型</strong>和<strong>引用类型</strong></p>
+<p>基本类型包括：<code>undefined、number、boolean、string、function、object</code></p>
+<p>我们不能说js中所有的数据都是对象，但是可以说绝大多数的数据都是对象，那么相信在js中也一定会存在一个根对象(<strong>Object.prototype</strong>)</p>
+<p>在js中根对象(<strong>Object.prototype</strong>)是一个空的对象，我们遇到的每一个对象都是从<strong>Object.prototype</strong>对象克隆而来，<strong>Object.prototype</strong>对象就是它们的原型。</p>
+<pre><code>var obj_1 = new Object();
+var obj_2 = {};
+
+//通过Object.getPrototypeOf来查看它们的原型
+console.log(Object.getPrototypeOf(obj_1) === Object.prototype); // true
+console.log(Object.getPrototypeOf(obj_2) === Object.prototype); // true    
+</code></pre><h3 id="要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><a href="#要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它" class="headerlink" title="要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"></a>要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</h3><p>在js中我们并不需要关心克隆的细节，因为这些操作浏览器引擎内部已经实现了，我们只需要显式地调用<code>var obj = new Object()或者var obj = {}</code>，引擎会从<code>Object.prototype</code>上克隆一个对象出来。</p>
+<p>我们也可以通过new操作符来创建一个对象</p>
+<pre><code>function Person(name){
+    this.name= name;
+};
+
+Person.prototype.getName = function(){
+    return this.name;
+}
+
+var r = new Person(&apos;anjie&apos;); // 通过new操作符得到一个对象
+
+console.log(r.name);//anjie
+console.log(r.getName());//anjie
+console.log(Object.getPrototypeOf(r) === Person.prototype); // true
+</code></pre><p><strong>我们通过new得到的对象具体做了什么？</strong><br>要创建 Person 的新实例，必须使用 new 操作符。以这种方式调用构造函数实际上会经历以下 4<br>个步骤：</p>
+<ol>
+<li>创建一个新对象；</li>
+<li>将构造函数的作用域赋给新对象（因此 this 就指向了这个新对象）；</li>
+<li>执行构造函数中的代码（为这个新对象添加属性；</li>
+<li>返回新对象；</li>
+</ol>
+<p>new操作符具体做了3件事</p>
+<pre><code>// 创建空对象
+var r = {}; 
+//将这个空对象的__proto__成员指向了Person函数对象prototype成员对象
+r.__proto__ = Person.prototype  
+//将Person函数对象的this指针替换成r，然后再调用Person函数,给r添加属性和方法
+Person.call(r)
+</code></pre><p><strong>模仿new操作符</strong></p>
+<pre><code>function Person(name){
+    this.name = name;
+}
+
+Person.prototype.getName = function(){
+    return this.name;
+}
+
+var simulationNew = function(){
+    var obj = new Object(); // 从Objecet.prototype克隆一个对象
+    var Constructor = [].shift.call(arguments); // 获取外部参数
+    obj.__proto__ = Constructor.prototype;//指向正确的原型
+    var newObj = Constructor.apply(obj,arguments); //借用外部传入的构造器给obj设置属性
+    return typeof newObj === &apos;object&apos; ? newObj : obj; //确保返回的永远是一个对象
+}
+
+var a = simulationNew(Person,&apos;anjie&apos;);
+
+console.log(a.name);//anjie
+console.log(a.getName());//anjie
+console.log(Object.getPrototypeOf(a) === Person.prototype); // true
+</code></pre><h3 id="对象会记住它的原型"><a href="#对象会记住它的原型" class="headerlink" title="对象会记住它的原型"></a>对象会记住它的原型</h3><p>js给对象提供了一个名为<code>__proto__</code>的隐藏属性，某个对象的<code>__proto__</code>属性默认会指向它的构造器的原型对象，即<code>{Constructor.prototype}</code>,在一些浏览器中，<code>__proto__</code>被公开出来了(Chrome/Firefox)</p>
+<pre><code>var a = new Object();
+console.log(a.__proto__ === Object.prototype); //true
+</code></pre><p><code>__proto__</code>就是对象跟对象构造器的原型联系起来的桥梁，正因为对象通过<code>__proto__</code>来记住的构造器的原型，我们上面模拟new操作符需要手动的给obj对象设置正确的<code>__proto__</code>指向</p>
+<h3 id="如果对象无法响应某个请求，它会把这个请求委托给它自己的原型"><a href="#如果对象无法响应某个请求，它会把这个请求委托给它自己的原型" class="headerlink" title="如果对象无法响应某个请求，它会把这个请求委托给它自己的原型"></a>如果对象无法响应某个请求，它会把这个请求委托给它自己的原型</h3><p>在js中，每个对象都是通过<code>Object.prototype</code>克隆出来的，如果是这样的话我们只能得到单一的继承关系，即每个对象都是继承自<code>Object.prototype</code>对象，这样的对象显然是非常受限的。</p>
+<p>js对象最初都是由<code>Object.prototype</code>克隆而来，但是对象构造器的原型并不仅限于<code>Object.prototype</code>上，而是可以动态指向其他对象，这样一来，但对象a需要借用b对象的能力时，可以选择性的把对象a的原型指向对象b，从而达到继承的效果。</p>
+<p><strong>下面的代码是我们常用的原型继承方式：</strong></p>
+<pre><code>var obj = {name:&apos;anjie&apos;};
+
+var A = function(){}
+
+A.prototype = obj;
+
+var a = new A();
+
+console.log(a.name);//anjie
+</code></pre><p><strong>上面的代码引擎内部做了什么？</strong></p>
+<ul>
+<li>遍历对象a中的所有属性，但是没有name这个属性</li>
+<li>查找name属性的这个请求委托对象a的构造器的原型，它被<code>a.__proto__</code>记录着并且指向<code>A.prototype</code>,而<code>A.prototype</code>被设置为对象obj</li>
+<li>在对象obj中找到name属性，并返回它的值</li>
+</ul>
+<p><strong>当我们期望得到一个类继承自另一个类时</strong>我们通常会使用下面这段代码：</p>
+<pre><code>var A = function(){};
+A.prototype = {
+    name:&apos;anjie&apos;
+}
+
+var B = function(){}
+B.prototype = new A();
+
+var b = new B();
+console.log(b.name);//anjie
+</code></pre><p><strong>上面的代码引擎内部做了什么？</strong></p>
+<ul>
+<li>遍历对象a中的所有属性，但是没有name这个属性</li>
+<li>查找name属性的这个请求委托对象b的构造器的原型，它被<code>b.__proto__</code>记录着并且指向<code>B.prototype</code>,而<code>B.prototype</code>被设置为通过<code>new A()</code>创建出来的对象</li>
+<li>在该对象中依然没有找到name属性，于是请求将继续委托给这个对象构造器的原型<code>A.prototype</code></li>
+<li>在<code>A.prototype</code>中找到name属性，并返回它的值</li>
+</ul>
+<p>如果<code>A.prototype</code>中还没有知道name属性，请求会被传递给<code>A.prototype</code>的原型<code>Object.prototype</code>，如果没有name属性，会继续传递给<code>Object.prototype</code>的原型，<code>Object.prototype</code>的原型是<code>null</code>,所以会返回<code>undefined</code></p>
+<p>ES6的中带来了新的<code>Class</code>语法，让js看起来更加想一门基于类的语言，其实背后还是通过原型机制来实现的。</p>
+<pre><code>Class Person{
+    constructor(name){
+        this.name = name;
+    },
+    getName(){
+        return this.name
+    }
+}
+
+Class manPerson extends Person {
+    constructor(name){
+        super(name);
+    }
+}
+
+var a = new manPerson(&apos;anjie&apos;);
+console.log(a.getName());//anjie
+</code></pre><p>总结就写到这里了，本文简单介绍了js中原型继承的机制，希望通过学习的我们的学习总结笔记让大家也有收获，如果有什么不对的地方，望大家指点出来，我们共同学习。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#js" >
+    <span class="tag-code">js</span>
+  </a>
+
+  <a href="/tags#设计模式" >
+    <span class="tag-code">设计模式</span>
+  </a>
+
+  <a href="/tags#学习笔记" >
+    <span class="tag-code">学习笔记</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/08/22/hello-world/">
+        <span class="nav-arrow">← </span>
+        
+          Hello World
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2018/10/04/typescript入门教程(一) 基础类型/">
+        
+          TypeScript入门教程(一) - 基础类型
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#所有的数据都是对象"><span class="toc-nav-text">所有的数据都是对象</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它"><span class="toc-nav-text">要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象会记住它的原型"><span class="toc-nav-text">对象会记住它的原型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#如果对象无法响应某个请求，它会把这个请求委托给它自己的原型"><span class="toc-nav-text">如果对象无法响应某个请求，它会把这个请求委托给它自己的原型</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2017/08/23/js原型继承五条基本原则/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "js原型继承五条基本原则",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2017/08/23/js原型继承五条基本原则/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

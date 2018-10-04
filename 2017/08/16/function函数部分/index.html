@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Javascript Function和函数学习笔记 | anjiecc
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>anjiecc</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Javascript Function和函数学习笔记</h2>
+  <p class="post-date">2017-08-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>详细介绍javascript中函数的使用<br><a id="more"></a></p>
+<h2 id="JavaScript函数"><a href="#JavaScript函数" class="headerlink" title="JavaScript函数"></a>JavaScript函数</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念<hr></h3><ul>
+<li>函数是由事件驱动的或者当它被调用执行的可复用的代码块</li>
+</ul>
+<p><code>js</code>支持两种函数：</p>
+<ul>
+<li>语言内部的函数（如<code>eval()</code>）</li>
+<li>自己创建的函数</li>
+</ul>
+<p>在<code>js</code>函数内部声明的变量(使用<code>var</code>)是局部变量，只能在函数内部访问它<br>你可以在不同的函数声明相同的变量名称，因为它们是局部变量，两个不会相互影响</p>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用<hr></h3><p>四种调用方式：</p>
+<ul>
+<li>作为函数</li>
+<li>作为方法</li>
+<li>作为构造函数</li>
+<li>通过<code>call()</code>和<code>apply()</code></li>
+</ul>
+<h3 id="返回函数的函数"><a href="#返回函数的函数" class="headerlink" title="返回函数的函数"></a>返回函数的函数<hr></h3><ol>
+<li>当函数无明确返回值时，返回<code>undefined</code></li>
+<li>当函数结束有<code>return</code>,返回什么就是什么</li>
+</ol>
+<p>我们可以利用<code>return</code>语句实现将函数返回值，或者单纯的结束函数<br>在使用了<code>return</code>的时候，函数会立即停止执行，如果<code>return</code>了值出去，函数的值就为返回的值</p>
+<p><strong><em>函数通常会返回一个唯一值，这个值可能是另一个函数</em></strong></p>
+<pre><code>function fn(){
+    var a = 10;
+    var b = 20;
+    var c = a +ｂ；
+    return c;
+}
+console.log(fn());//输出30；
+//我们可以返回的函数赋值给你个变量
+var fn1 = fn();
+console.log(fn1);//输出30；
+//如果我们想返回的函数立即执行我们可以这样
+var fn2 = fn()();//在加一个括号表示立即执行函数
+</code></pre><p><code>js</code>函数传递参数都是按照值传递。</p>
+<p><font color="red">引用类型</font>：</p>
+<p><code>js</code>中引用类型都是存储在堆内存中的对象，变量中保存的实际只是一个指针，这个指针执行内存中的另一个位置，这个位置保存对象。</p>
+<h3 id="创建匿名函数"><a href="#创建匿名函数" class="headerlink" title="创建匿名函数"></a>创建匿名函数<hr></h3><pre><code>function(){
+    console.log(&apos;我是一个没有名字的函数&apos;)
+}()
+</code></pre><p>这种函数的好处是在我们只使用一次，省的在去定义一个函数名，避免命名冲突，<code>js</code>中没有命名空间的概念，因此有两个相同的函数名字，<code>js</code>会执行后面那个函数，因为<code>js</code>解析代码是一段一段的执行，他会按照最后出现的执行</p>
+<ul>
+<li><p>通过自我执行来执行匿名函数：</p>
+<pre><code>(function(){
+    console.log(&apos;打开程序我马上就执行啦！！！&apos;)
+})()
+</code></pre></li>
+<li><p>把匿名函数自我执行的返回值赋值给变量：</p>
+<pre><code>var fn = (function(){
+    return &apos;hi&apos;;
+})();
+console.log(fn);//输出hi
+</code></pre></li>
+<li><p>自我执行匿名函数的传参：</p>
+<pre><code>(function(a){
+    console.log(a);//输出10
+})(10)
+</code></pre></li>
+</ul>
+<h3 id="js创建动态函数"><a href="#js创建动态函数" class="headerlink" title="js创建动态函数"></a><code>js</code>创建动态函数<hr></h3><p><code>js</code>支持创建动态函数，动态函数必须用<code>Function</code>对象来定义(Function是<code>js</code>中的一个对象，他是引用类型，是固定不变的，对象中的Function中的’F’必须大小）</p>
+<p>创建动态函数的基本格式：<code>var 变量名 = new Function(&#39;参数1&#39;,&#39;参数2&#39;，&#39;参数n&#39;,&#39;执行语句&#39;)</code></p>
+<pre><code>var fn = new Function(&apos;x&apos;,&apos;y&apos;,&apos;var sum ; sum = x + y ; return sum;&apos;)
+console.log(fn(2,3));//输出5
+
+//上面的代码等同于：
+var fn = function(x,y){
+    var sum;
+    sum = x + y;
+    return sum;
+}
+console.log(fn(2,3));//输出5
+//第一个函数是动态函数，第二个函数是静态函数
+</code></pre><p><strong><em>一般情况下我们不使用动态函数</em></strong></p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数<hr></h3><p>回调函数是一个函数的调用的过程，简单理解就是一个函数里面传参数，传的参数是一个函数，第一个函数执行完成后再去执行第二个函数。</p>
+<pre><code>function fn(fn1){
+    console.log(&apos;aa&apos;)；
+    fn1();
+}
+function fn1(){
+    console.log(&apos;bb&apos;);
+}
+fn(fn1);
+//先执行fn函数，fn函数执行完成后再执行fn1函数
+//这里fn1函数就是回调函数
+</code></pre><h3 id="方法和函数的区别"><a href="#方法和函数的区别" class="headerlink" title="方法和函数的区别"></a>方法和函数的区别<hr></h3><pre><code>var arr = [1,2,3,4,5]
+var a =12;   // 变量：自由的
+arr.a= 5;     //属性：属于一个对象
+function show()     //函数：自由的
+{
+     alert(‘a’);
+}
+arr.fn = function()   //方法：属于一个对象
+{
+     alert(‘b’);
+}
+</code></pre><p><strong><em>其实方法就是函数，只不过方法是所属的对象</em></strong></p>
+<h3 id="JS全局函数"><a href="#JS全局函数" class="headerlink" title="JS全局函数"></a><code>JS</code>全局函数<hr></h3><p>js中有7中全局函数：</p>
+<pre><code>escape( )、eval( )、isFinite( )、isNaN( )、parseFloat( )、parseInt( )、unescape( )
+</code></pre><h3 id="函数的几个作用"><a href="#函数的几个作用" class="headerlink" title="函数的几个作用"></a>函数的几个作用<hr></h3><ul>
+<li><p>作为一个类构造器使用</p>
+<pre><code>function Class(){};
+Class.prototype = {};
+var item = new Class();
+</code></pre></li>
+<li><p>作为闭包使用</p>
+<pre><code>(function(){
+    //独立的作用域
+})（）
+</code></pre></li>
+<li><p>作为构造函数调用</p>
+<pre><code>function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+var per1 = new Person(&apos;xiaoming&apos;,19);
+var per2 = new Person(&apos;xiaohong&apos;,20);
+per1.name;//输出&apos;xiaoming&apos;
+per1.age;//输出19
+per2.name;//输出&apos;xiaohong&apos;
+per2.age;//输出20
+</code></pre></li>
+</ul>
+<p>可以使用 new 运算符结合像 Object()、Date() 和 Function() 这样的预定义的构造函数来创建对象并对其初始化。面向对象的编程其强有力的特征是定义自定义构造函数以创建脚本中使用的自定义对象的能力。创建了自定义的构造函数，这样就可以创建具有已定义属性的对象。</p>
+<p><strong><em>优缺点：</em></strong><br>使用构造器函数的优点是，它可以根据参数来构造不同的对象。 缺点是构造时每个实例对象都会生成重复调用对象的方法，造成了内存的浪费</p>
+<h3 id="作为值的函数"><a href="#作为值的函数" class="headerlink" title="作为值的函数"></a>作为值的函数<hr></h3><ul>
+<li><p><code>JS</code>中函数是一种语法，也是一个值，我们可以把函数赋值给一个变量</p>
+<p>  function fn(x,y){</p>
+<pre><code>return x * y
+</code></pre><p>  }<br>  var newFn = fn();<br>  fn(2,3);//输出6<br>  newFn(3,4);//输出12</p>
+</li>
+<li><p>函数也可以赋值给一个对象的属性，我们称为方法</p>
+<pre><code>function fn(x,y){
+    return x * y
+}
+var obj = {};//我们这里定义了一个空对象obj
+obj.seque = fn(2.3);//我们给空对象obj动态赋值了一个属性为seque
+</code></pre></li>
+</ul>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数<hr></h3><p>这里的高阶函数可不是高数里的那个高阶函数，所谓高阶函数就是操作函数的函数，它接收一个或多个函数作为参数，并返回新函数</p>
+<h3 id="call-和apply"><a href="#call-和apply" class="headerlink" title="call()和apply()"></a>call()和apply()<hr></h3><p>call()函数里面第一个参数是执行上下文，第二个是传递的参数。。。可以传递多个参数</p>
+<pre><code>function.call(this,1,2,3);
+</code></pre><p>apply()函数里面第一个参数是执行上下文，第二个是一个数组对象。</p>
+<pre><code>function.apply(this,[1,2,3]);
+</code></pre><p><strong><em>这部分后面还要完善，这里只是简单的介绍一下 add 2016.8.12</em></strong></p>
+<h3 id="函数里面的参数-arguments"><a href="#函数里面的参数-arguments" class="headerlink" title="函数里面的参数(arguments)"></a>函数里面的参数(arguments)<hr></h3><p>当函数被调用的时候，会得到一个参数数组，那就是<code>arguments</code>数组，通过它，函数可以访问所有它被调用时传递给它的参数</p>
+<pre><code>var sum = function(){
+    var i ,sum =0;
+    for(i = 0;i&lt;arguments.length;i+=1){
+        sum+=arguments[i];
+    }
+    return sum;
+};
+   console.log(sum(4,5,23,13,35,46,-10));//116
+</code></pre><p><strong>实际上，arguments并不是一个真正的数组，它只是一个类数组的对象，它拥有一个length属性，但他缺少所有数组的方法。另外，arguments对象的长度是由传入的参数个数决定的，而不是由定义函数时的命名参数的个数决定的</strong></p>
+<p><strong>函数在定义或者声明的时候，所有的参数都是形参，因此，我们可以根据实际情况来命名参数，函数也只有在被调用时才会传入实参。而每个函数在被调用时都会自动取得两个特殊变量：this 和 arguments</strong></p>
+<h3 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a>递归函数<hr></h3><p>函数的递归，即一个函数在通过名字调用自身的情况下构成的</p>
+<h3 id="私有变量和私有函数"><a href="#私有变量和私有函数" class="headerlink" title="私有变量和私有函数"></a>私有变量和私有函数<hr></h3><ul>
+<li><p>定义在函数内部的变量和函数，如果不对外提供接口，外面是访问不到这些函数和变量的，这就叫做私有变量和私有函数</p>
+<pre><code>function Fn(){
+    var a = 10;//私有变量
+    var fn1 = function(){};//私有函数
+}
+var newFn = new Fn();
+console.log(newFn.a);//undefined
+console.log(newFn.fn1);//undefined
+</code></pre><h3 id="静态变量和函数"><a href="#静态变量和函数" class="headerlink" title="静态变量和函数"></a>静态变量和函数<hr></h3></li>
+</ul>
+<ul>
+<li><p>当定义一个函数后通过点号 “.”为其添加的属性和函数，通过对象本身仍然可以访问得到，但是其实例却访问不到，这样的变量和函数分别被称为静态变量和静态函数。</p>
+<pre><code>function Obj(){};
+
+Obj.num = 72;//静态变量
+Obj.fn = function(){}//静态函数 
+
+alert(Obj.num);//72
+alert(typeof Obj.fn)//function
+
+var t = new Obj();
+alert(t.name);//undefined
+alert(typeof t.fn);//undefined
+</code></pre><h3 id="实例变量和函数"><a href="#实例变量和函数" class="headerlink" title="实例变量和函数"></a>实例变量和函数<hr></h3></li>
+<li><p>在面向对象编程中除了一些库函数我们还是希望在对象定义的时候同时定义一些属性和方法，实例化后可以访问，js也能做到这样</p>
+<pre><code>function Box(){
+        this.a=[]; //实例变量
+        this.fn=function(){ //实例方法
+
+        }
+    }
+
+    console.log(typeof Box.a); //undefined
+    console.log(typeof Box.fn); //undefined
+
+    var box=new Box();
+    console.log(typeof box.a); //object
+    console.log(typeof box.fn); //function
+</code></pre></li>
+</ul>
+<p>为实例变量和方法添加新的方法和属性</p>
+<pre><code>function Box(){
+            this.a=[]; //实例变量
+            this.fn=function(){ //实例方法
+
+            }
+        }
+
+        var box1=new Box();
+        box1.a.push(1);
+        box1.fn={};
+        console.log(box1.a); //[1]
+        console.log(typeof box1.fn); //object
+
+        var box2=new Box();
+        console.log(box2.a); //[]
+        console.log(typeof box2.fn); //function
+</code></pre><p><strong>在box1中修改了a和fn，而在box2中没有改变，由于数组和函数都是对象，是引用类型，这就说明box1中的属性和方法与box2中的属性与方法虽然同名但却不是一个引用，而是对Box对象定义的属性和方法的一个复制。</strong></p>
+<p><strong>这个对属性来说没有什么问题，但是对于方法来说问题就很大了，因为方法都是在做完全一样的功能，但是却又两份复制，如果一个函数对象有上千和实例方法，那么它的每个实例都要保持一份上千个方法的复制，这显然是不科学的，这可肿么办呢，prototype应运而生。</strong></p>
+<h3 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性<hr></h3><p><strong>基本概念：</strong></p>
+<p>我们创建的每个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。那么，prototype就是通过调用构造函数而创建的那个对象实例的原型对象。</p>
+<p>使用原型的好处是可以让对象实例共享它所包含的属性和方法。也就是说，不必在构造函数中添加定义对象信息，而是可以直接将这些信息添加到原型中。使用构造函数的主要问题就是每个方法都要在每个实例中创建一遍。</p>
+<p>在JavaScript中,一共有两种类型的值,原始值和对象值。每个对象都有一个内部属性 prototype ,我们通常称之为原型。原型的值可以是一个对象,也可以是null。如果它的值是一个对象，则这个对象也一定有自己的原型。这样就形成了一条线性的链，我们称之为原型链</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+    
+      <a class="nav-right" href="/2017/08/21/js设计模式单例模式/">
+        
+          js设计模式单例模式
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#JavaScript函数"><span class="toc-nav-text">JavaScript函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概念"><span class="toc-nav-text">概念</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#函数调用"><span class="toc-nav-text">函数调用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#返回函数的函数"><span class="toc-nav-text">返回函数的函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建匿名函数"><span class="toc-nav-text">创建匿名函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#js创建动态函数"><span class="toc-nav-text">js创建动态函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#回调函数"><span class="toc-nav-text">回调函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#方法和函数的区别"><span class="toc-nav-text">方法和函数的区别</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JS全局函数"><span class="toc-nav-text">JS全局函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#函数的几个作用"><span class="toc-nav-text">函数的几个作用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#作为值的函数"><span class="toc-nav-text">作为值的函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#高阶函数"><span class="toc-nav-text">高阶函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#call-和apply"><span class="toc-nav-text">call()和apply()</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#函数里面的参数-arguments"><span class="toc-nav-text">函数里面的参数(arguments)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#递归函数"><span class="toc-nav-text">递归函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#私有变量和私有函数"><span class="toc-nav-text">私有变量和私有函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#静态变量和函数"><span class="toc-nav-text">静态变量和函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实例变量和函数"><span class="toc-nav-text">实例变量和函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#prototype属性"><span class="toc-nav-text">prototype属性</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2017/08/16/function函数部分/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Javascript Function和函数学习笔记",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2017/08/16/function函数部分/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

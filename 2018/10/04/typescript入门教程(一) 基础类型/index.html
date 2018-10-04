@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      TypeScript入门教程(一) - 基础类型 | anjiecc
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>anjiecc</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>TypeScript入门教程(一) - 基础类型</h2>
+  <p class="post-date">2018-10-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><code>Typescript</code>中的基础类型和<code>JavaScript</code>中定义的五种基本类型(<code>Number</code>,<code>String</code>,<code>Boolean</code>,<code>Undefined</code>,<code>Null</code>)几乎相同,还新增了枚举类型,接下来我们详细介绍<code>TypeScript</code>中的基础类型<br><a id="more"></a></p>
+<h3 id="布尔值-Boolean"><a href="#布尔值-Boolean" class="headerlink" title="布尔值(Boolean)"></a>布尔值(Boolean)</h3><ul>
+<li>布尔值类型就是简单的<code>true</code> or <code>false</code></li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isShow: <span class="built_in">boolean</span> = <span class="literal">true</span> </span><br><span class="line"><span class="comment">// :后面是指定变量isShow的类型，如果修改了isShow的变量类型为非boolean值就会报错</span></span><br></pre></td></tr></table></figure>
+<h3 id="数字-Number"><a href="#数字-Number" class="headerlink" title="数字(Number)"></a>数字(Number)</h3><ul>
+<li><code>Typescript</code>中的数字类型和<code>Javascript</code>中的数字类型一样都是浮点数</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age: <span class="built_in">number</span> = <span class="number">26</span></span><br><span class="line"><span class="keyword">let</span> money: <span class="built_in">number</span> = <span class="number">6000.04</span></span><br><span class="line"><span class="keyword">let</span> hex: <span class="built_in">number</span> = <span class="number">0xf00d</span></span><br><span class="line"><span class="keyword">let</span> binary: <span class="built_in">number</span> = <span class="number">0b1010</span></span><br><span class="line"><span class="keyword">let</span> octal: <span class="built_in">number</span> = <span class="number">0o744</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h3><ul>
+<li><code>Typescript</code>中的字符串和<code>JavaScript</code>字符串写法一样都是通过双引号(<code>&quot;&quot;</code>)或者单引号(<code>&#39;&#39;</code>)表示字符串</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str1: <span class="built_in">string</span> = <span class="string">'hi'</span></span><br><span class="line"><span class="keyword">let</span> str2: <span class="built_in">string</span> = <span class="string">"hi"</span></span><br></pre></td></tr></table></figure>
+<h3 id="Null和Undefined"><a href="#Null和Undefined" class="headerlink" title="Null和Undefined"></a>Null和Undefined</h3><ul>
+<li><code>Typescript</code>中<code>null</code>和<code>undefined</code>两个各自有自己的类型分别是<code>null</code>和<code>undefined</code></li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="literal">undefined</span> = <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">let</span> n: <span class="literal">null</span> = <span class="literal">null</span></span><br><span class="line"><span class="comment">// undefined和null是所有类型的子集，就是你可以把所有类型赋值成undefined和null</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组-Array"><a href="#数组-Array" class="headerlink" title="数组(Array)"></a>数组(Array)</h3><ul>
+<li><code>Typescript</code>里面的数组和JavaScript中一样都可以操作数组元素,在<code>Typescript</code>中有两种定义数组的方式</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一:</span></span><br><span class="line"><span class="keyword">let</span> list1: <span class="built_in">string</span>[] = [<span class="string">'name1'</span>, <span class="string">'name2'</span>, <span class="string">'name3'</span>]</span><br><span class="line"><span class="keyword">let</span> list2: <span class="built_in">number</span>[] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment">// 方法二:</span></span><br><span class="line"><span class="keyword">let</span> list3: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt; = [<span class="string">'name1'</span>, <span class="string">'name2'</span>, <span class="string">'name3'</span>]</span><br><span class="line"><span class="keyword">let</span> list4: <span class="built_in">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="元组-Tuple"><a href="#元组-Tuple" class="headerlink" title="元组(Tuple)"></a>元组(Tuple)</h3><ul>
+<li>元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。 比如，你可以定义一对值分别为 string和number类型的元组</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> t: [<span class="built_in">string</span>, <span class="built_in">number</span>]</span><br><span class="line">t = [<span class="string">'mickey'</span>, <span class="number">26</span>] <span class="comment">// ok</span></span><br><span class="line">t = [<span class="number">26</span>, <span class="string">'mickey'</span>] <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<h3 id="枚举-Enum"><a href="#枚举-Enum" class="headerlink" title="枚举(Enum)"></a>枚举(Enum)</h3><ul>
+<li><code>enum</code>类型是在<code>JavaScript</code>类型中新增的类型, 像C#等其它语言一样，使用枚举类型可以为一组数值赋予友好的名字</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Style &#123;width, height, color&#125;</span><br><span class="line"><span class="keyword">let</span> warp: Style = Style.width</span><br></pre></td></tr></table></figure>
+<p>默认情况下，枚举里面的值是从<code>0</code>开始为元素编号，也可以手动的指定成员的数值</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Style &#123;width = <span class="number">1</span>, height = <span class="number">2</span>, color = <span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">let</span> wrap: Style = Style.width</span><br><span class="line"><span class="comment">// 也可以通过枚举的值得到它的名字</span></span><br><span class="line"><span class="keyword">let</span> wrap: Style = Style[<span class="number">2</span>] <span class="comment">// height</span></span><br></pre></td></tr></table></figure>
+<h3 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h3><ul>
+<li>我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查就可以使用<code>any</code>类型来标记这些变量</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">any</span> = <span class="string">'mickey'</span></span><br><span class="line">a = <span class="number">26</span></span><br><span class="line">a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> list1: <span class="built_in">Array</span>&lt;<span class="built_in">any</span>&gt; = [<span class="number">1</span>,<span class="string">'name1'</span>, <span class="literal">true</span>]</span><br></pre></td></tr></table></figure>
+<p><strong><em>通过any定义的变量在后面可以随意赋值成其他类型的变量,这个就和js使用一样，js是弱类型语言定义变量可以不指定类型而且可以随意修改变量类型</em></strong></p>
+<h3 id="Void"><a href="#Void" class="headerlink" title="Void"></a>Void</h3><ul>
+<li>某种程度上来说，void类型像是与any类型相反，它表示没有任何类型。 当一个函数没有返回值时，你通常会见到其返回值类型是 void</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>): <span class="title">void</span> </span>&#123; <span class="built_in">console</span>.log(<span class="string">'test...'</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明变量为void 你只能为它赋值为 undefined和null</span></span><br><span class="line"><span class="keyword">let</span> a: <span class="built_in">void</span> = <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">let</span> b: <span class="built_in">void</span> = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<h3 id="Never"><a href="#Never" class="headerlink" title="Never"></a>Never</h3><ul>
+<li>never类型表示的是那些永不存在的值的类型。 例如， never类型是那些总是会抛出异常或根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型； 变量也可能是 never类型，当它们被永不为真的类型保护所约束时</li>
+<li>never类型是任何类型的子类型，也可以赋值给任何类型；然而，没有类型是never的子类型或可以赋值给never类型（除了never本身之外）。 即使 any也不可以赋值给never</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回never的函数必须存在无法达到的终点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'error'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 推断的返回值类型为never</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> error(<span class="string">'error'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回never的函数必须存在无法达到的终点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我们介绍了<code>TypeScript</code>的基础类型，第二节我们将介绍变量声明</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#学习笔记" >
+    <span class="tag-code">学习笔记</span>
+  </a>
+
+  <a href="/tags#TypeScript" >
+    <span class="tag-code">TypeScript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/08/23/js原型继承五条基本原则/">
+        <span class="nav-arrow">← </span>
+        
+          js原型继承五条基本原则
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#布尔值-Boolean"><span class="toc-nav-text">布尔值(Boolean)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数字-Number"><span class="toc-nav-text">数字(Number)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字符串-String"><span class="toc-nav-text">字符串(String)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Null和Undefined"><span class="toc-nav-text">Null和Undefined</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数组-Array"><span class="toc-nav-text">数组(Array)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#元组-Tuple"><span class="toc-nav-text">元组(Tuple)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#枚举-Enum"><span class="toc-nav-text">枚举(Enum)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Any"><span class="toc-nav-text">Any</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Void"><span class="toc-nav-text">Void</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Never"><span class="toc-nav-text">Never</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/10/04/typescript入门教程(一) 基础类型/';
+    var banner = 'your-banner-link.jpg'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "TypeScript入门教程(一) - 基础类型",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/04/typescript入门教程(一) 基础类型/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

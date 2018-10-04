@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      js设计模式单例模式 | anjiecc
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>anjiecc</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>js设计模式单例模式</h2>
+  <p class="post-date">2017-08-21</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>单例模式是一种常见的模式，有一些对象我们往往只需要一个，比如线程池、全局缓存、浏览器中的window对象等。在js开发中，单例模式的用途同样非常广泛……<br><a id="more"></a></p>
+<h3 id="JavaScript-设计模式-单例模式"><a href="#JavaScript-设计模式-单例模式" class="headerlink" title="JavaScript 设计模式-单例模式"></a>JavaScript 设计模式-单例模式</h3><h3 id="单例模式的定义"><a href="#单例模式的定义" class="headerlink" title="单例模式的定义"></a>单例模式的定义</h3><ul>
+<li>定义：<code>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</code></li>
+</ul>
+<h3 id="实现单例模式"><a href="#实现单例模式" class="headerlink" title="实现单例模式"></a>实现单例模式</h3><ul>
+<li>原理：<code>用一个变量来保存当前是否已经为某个类创建对象，如果创建了就直接返回该对象，反之就重新实例化</code></li>
+<li><p>代码：</p>
+<pre><code>var Fn = function(name){
+    this.name = name;
+}
+Fn.prototype.getName = function(){
+    console.log(this.name);
+}
+Fn.getInstance = (function(){
+    var instance = null;
+    return function(name){
+        if(!instance){
+            instance = new Fn(name);
+        }
+        return instance;
+    }
+})();
+var a = Fn.getInstance(&apos;xxx&apos;);
+var b = Fn.getInstance(&apos;ooo&apos;);
+
+console.log(a === b);//true
+</code></pre></li>
+</ul>
+<h3 id="透明的单例模式"><a href="#透明的单例模式" class="headerlink" title="透明的单例模式"></a>透明的单例模式</h3><p>我们创建一个CreateDiv单例类来负责在页面中创建唯一的div节点，实现一个<strong>‘透明’</strong>的单例类，用户从这个类中创建对象的时候，可以像使用任何普通类一样。</p>
+<ul>
+<li><p>代码</p>
+<pre><code>var CreateDiv = (function(){
+    var instance;
+    var CreateDiv = function(html){
+        if(instance){
+            return instance;
+        }
+        this.html= html;
+        this.init();
+        return instance = this;
+    };
+    CreateDiv.prototype.init = function(){
+        var div = $(&apos;&lt;div&gt;&lt;/div&gt;&apos;);
+        div.html(this.html);
+        $(body).append(div);
+    }
+    return CreateDiv;
+})()
+
+var a = new CreateDiv(&apos;one&apos;);
+var b = new CreateDiv(&apos;two&apos;);
+
+console.log(a === b); //true
+</code></pre><p>  上面的代码实现了<strong>透明</strong>单例，但是也有它的缺点，上面我们使用了自执行函数和闭包，并且让这个匿名函数返回真正的构造函数，这样增加了一些程序的复杂度。<br>  如果某天我们需要利用这个类，在页面上创建很多个div，既要让这个单例类变成一个普通的可以产生多个实例，那我们就需要修改CreateDiv构造函数，把控制创建唯一对象的那段代码删除掉，这样就会刚给我带来一些不必要的麻烦，所有我们利用另外一种方式去实现，这种方式叫着<strong>代理模式</strong>,后面的笔记中我会详细介绍<strong>代理模式</strong>的具体实习方式</p>
+</li>
+</ul>
+<h3 id="利用代理模式实现单例模式"><a href="#利用代理模式实现单例模式" class="headerlink" title="利用代理模式实现单例模式"></a>利用代理模式实现单例模式</h3><p>我们把上面的透明单例代码中间创建div部分代码移除出去，使他成为一个普通的创建DIV类</p>
+<ul>
+<li><p>代码</p>
+<pre><code>//创建div类
+var CreateDiv = function(html){
+    this.html = html;
+    this.init();
+}
+
+CreateDiv.prototype = function(){
+    var div = $(&apos;&lt;div&gt;&lt;/div&gt;&apos;);
+    div.html(this.html);
+    $(&apos;body&apos;).append(div);
+}
+
+//代理类
+var ProxySingleton = (function(){
+    var instance;
+    return function(){
+        if(!instance){
+            instance = new CreateDiv(html);
+        }
+        return instance;
+    }
+})()
+
+//测试
+var a = new ProxySingleton(&apos;one&apos;);
+var b = new ProxySingleton(&apos;two&apos;);
+
+console.log(a === b );//true
+</code></pre><p>  通过引入代理类的方式，我们也实现了单例模式，我们把负责管理单例的逻辑移到代理类<strong>ProxySingleton</strong>中，<strong>CreateDiv</strong>就变成一个普通类，它更<strong>ProxySingleton</strong>组合起来就可以实现单例模式的效果，这样的代码会更叫好维护。</p>
+</li>
+</ul>
+<h3 id="JavaScript中的单例模式"><a href="#JavaScript中的单例模式" class="headerlink" title="JavaScript中的单例模式"></a>JavaScript中的单例模式</h3><ul>
+<li>上面提到的创建单例模式，更多的是接近面向对象语言中的实现，单例对象从<strong>‘类’</strong>创建而来，在类为中心得语言中，这是很自然的做法。</li>
+<li>在JavaScript中，其实是一门无类语言，没有类这个概念，在JS中创建单例模式方法很简单，我们只需要创建一个唯一的类。</li>
+<li>全局变量不是单例模式，但是在js开发中，我们经常把全局变量当成单例模式来使用<h5 id="我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染"><a href="#我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染" class="headerlink" title="我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染"></a>我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染</h5></li>
+</ul>
+<ol>
+<li><p>使用命名空间</p>
+<h6 id="使用对象字面量的方式来创建："><a href="#使用对象字面量的方式来创建：" class="headerlink" title="使用对象字面量的方式来创建："></a>使用对象字面量的方式来创建：</h6><pre><code>var name = {
+    a:function(){
+        console.log(&apos;1&apos;);
+    },
+    b:function(){
+        console.log(&apos;2&apos;);
+    }
+};
+</code></pre><h6 id="使用动态创建命名空间"><a href="#使用动态创建命名空间" class="headerlink" title="使用动态创建命名空间"></a>使用动态创建命名空间</h6><pre><code>var My = {};
+My.name = function(name){
+    var parts = name.split(&apos;.&apos;);
+    var current = My;
+    for(var i in parts){
+        if(!current[parts[i]]){
+            current[parts[i]] = {};
+        }
+        current = current[parts[i]];
+    }
+}
+My.name = (&apos;init&apos;);
+My.name = (&apos;dom.style&apos;);
+//上面创建结果等价于：
+var My = {
+    init:{},
+    dom:{
+        style:{}
+    }
+};    
+</code></pre></li>
+<li><p>使用闭包封装私有变量</p>
+<pre><code>var user = (function(){
+    var __name = &apos;anjie&apos;,
+        __age = 25,
+
+    return {
+        getUserInfo:function(){
+            return __name + &apos;-&apos; + __age;
+        }
+    }    
+})();
+</code></pre><p><strong>我们使用下划线来约定私有变量<strong>name和</strong>age,他们被封装在闭包产生的作用域中，外部是访问不到这两个变量的，这样就避免了对全局的命令污染。</strong></p>
+</li>
+</ol>
+<h3 id="通用单例模式"><a href="#通用单例模式" class="headerlink" title="通用单例模式"></a>通用单例模式</h3><p>直接上代码：</p>
+<pre><code>var getSingle = function(fn){
+    var result;
+    return function(){
+        return result || (result = fn.apply(this,arguments));
+    }
+}
+
+//实例
+var createDiv = function(){
+    var div = $(&apos;&lt;div&gt;&lt;/div&gt;&apos;);
+    div.html(&apos;这个是测试div&apos;);
+    div.css(&apos;display&apos;,&apos;none&apos;);
+    $(&apos;body&apos;).append(div);
+    return div;
+}
+
+var createSingleLoginLayer = getSingle(createDiv);
+
+$(&apos;loginBtn&apos;).on(&apos;click&apos;,function(){
+    var loginLayer = createSingleLoginLayer();
+    loginLayer.css(&apos;display&apos;,&apos;block&apos;);
+})
+</code></pre><p><strong>上面代码是一个通用的单例模式，我们在日常开发中可以直接利用这段代码来实现单例模式。</strong></p>
+<hr>
+<p><strong>以上代码借鉴于《JavaScript设计模式与开发实践》 – 曾探,这本书对设计模式进行的详细的介绍，推荐大家学习</strong></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#js" >
+    <span class="tag-code">js</span>
+  </a>
+
+  <a href="/tags#设计模式" >
+    <span class="tag-code">设计模式</span>
+  </a>
+
+  <a href="/tags#学习笔记" >
+    <span class="tag-code">学习笔记</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2017/08/16/function函数部分/">
+        <span class="nav-arrow">← </span>
+        
+          Javascript Function和函数学习笔记
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2017/08/22/hello-world/">
+        
+          Hello World
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript-设计模式-单例模式"><span class="toc-nav-text">JavaScript 设计模式-单例模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#单例模式的定义"><span class="toc-nav-text">单例模式的定义</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实现单例模式"><span class="toc-nav-text">实现单例模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#透明的单例模式"><span class="toc-nav-text">透明的单例模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#利用代理模式实现单例模式"><span class="toc-nav-text">利用代理模式实现单例模式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript中的单例模式"><span class="toc-nav-text">JavaScript中的单例模式</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染"><span class="toc-nav-text">我们在js开发中有必要减少全局变量的使用，如果使用了也要把它的污染降到最低，以下两种方式就是降低全局变量带来的命名污染</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#使用对象字面量的方式来创建："><span class="toc-nav-text">使用对象字面量的方式来创建：</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#使用动态创建命名空间"><span class="toc-nav-text">使用动态创建命名空间</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通用单例模式"><span class="toc-nav-text">通用单例模式</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2017/08/21/js设计模式单例模式/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "js设计模式单例模式",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2017/08/21/js设计模式单例模式/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
