@@ -18,7 +18,7 @@
       'bottom': '0',
       'height': '100%',
       'text-align': 'right',
-      'width': '50%',
+      'width': '70%',
       'box-shadow': '1px 1px 15px #d9d9d9',
       'transform': 'translateX(-100%)',
       'max-height': '100%'
