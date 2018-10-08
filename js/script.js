@@ -21,6 +21,7 @@
       'width': '50%',
       'box-shadow': '1px 1px 15px #d9d9d9',
       'transform': 'translateX(-100%)',
+      'max-height': '100%'
     })
     $('.menu-mask-level').css({
       'max-width': '0',
