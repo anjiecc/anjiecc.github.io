@@ -35,12 +35,27 @@
     }, 200)
   }
 
+  function bodyScroll(event){
+    event.preventDefault();
+  }
   $('.menu').on('click', function () {
     if (!header.hasClass('fixed-header') || isOpen) {
       header.toggleClass('fixed-header')
       isOpen = !isOpen
     }
     $('.menu-mask').toggleClass('open')
+    $('.menu-mask-level').toggleClass('open-mask')
+    $('body,html').css('overflow', 'hidden')
+    document.body.addEventListener('touchmove',bodyScroll,false);
+  })
+
+  $('.menu-mask-level').on('click', function() {
+    if($(this).hasClass('open-mask')) {
+      $('.menu-mask').toggleClass('open')
+      $('.menu-mask-level').toggleClass('open-mask')
+      $('body,html').css('overflow', '')
+      document.body.removeEventListener('touchmove',bodyScroll,false);
+    }
   })
 
   $('#tag-cloud a').on('click', function () {
