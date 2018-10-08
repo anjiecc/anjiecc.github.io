@@ -9,6 +9,30 @@
   var isOpen = false
 
   $(document).ready(function () {
+    $('.menu-mask').css({
+      '-webkit-transition': 'transform .2s ease',
+      'transition': 'transform .2s ease',
+      'top': '0',
+      'left': '0',
+      'right': '0',
+      'bottom': '0',
+      'height': '100%',
+      'text-align': 'right',
+      'width': '50%',
+      'box-shadow': '1px 1px 15px #d9d9d9',
+      'transform': 'translateX(-100%)',
+    })
+    $('.menu-mask-level').css({
+      'max-width': '0',
+      'position': 'fixed',
+      'top': '0',
+      'left': '0',
+      'right': '0',
+      'bottom': '0',
+      'background-color': 'rgba(0,0,0,0.6)',
+      'transition': 'all .1s ease',
+      '-webkit-transition': 'all .1s ease'
+    })
     NProgress.start()
     $('#nprogress .bar').css({
       'background': '#42b983'
@@ -43,16 +67,16 @@
       header.toggleClass('fixed-header')
       isOpen = !isOpen
     }
-    $('.menu-mask').toggleClass('open')
-    $('.menu-mask-level').toggleClass('open-mask')
+    $('.menu-mask').toggleClass('open').css({transform: 'translateX(0)'})
+    $('.menu-mask-level').toggleClass('open-mask').css('max-width','100%')
     $('body,html').css('overflow', 'hidden')
     document.body.addEventListener('touchmove',bodyScroll,false);
   })
 
   $('.menu-mask-level').on('click', function() {
     if($(this).hasClass('open-mask')) {
-      $('.menu-mask').toggleClass('open')
-      $('.menu-mask-level').toggleClass('open-mask')
+      $('.menu-mask').toggleClass('open').css({transform: 'translateX(-100%)'})
+      $('.menu-mask-level').toggleClass('open-mask').css('max-width','0')
       $('body,html').css('overflow', '')
       document.body.removeEventListener('touchmove',bodyScroll,false);
     }
