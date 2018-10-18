@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      TypeScript入门教程(九) - 高级类型 | JH
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <style>
+  .menu-author-wrap {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  .menu-author-wrap .menu-author-wrap-bg {
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .menu-author-wrap-img {
+    padding-top: 10%;
+  }
+  .menu-author-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #9e9d9d;
+  }
+  .menu-author-wrap h3{
+    margin: 5px 0
+  }
+  .menu-author-wrap .description {
+    font-size: 12px;
+    color: #de9898;
+  }
+  .menu-list li {
+    padding: 0;
+    text-align: left;
+  }
+  .menu-list .menu-link {
+    display: block;
+    padding: 10px 0px 10px 15px;
+  }
+</style>
+<header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>JH</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask-level"></div>
+    <div class="menu-mask">
+      <div class="menu-author-wrap">
+          <div class="menu-author-wrap-bg" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+          <div class="menu-author-wrap-img">
+            <img src="https://avatars2.githubusercontent.com/u/16866569?v=4" />
+          </div>
+          <h3>Xiaoai</h3>
+          <p class="description">Whatever is worth doing is worth doing well</p>
+          <p class="description">风雪是你,平淡是你;清贫是你,荣华是你;心底温柔是你,目光所至也是你@hui</p>
+          <a href="mailto:xiaoai7904@gmail.com">xiaoai7904@gmail.com</a>
+      </div>
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>TypeScript入门教程(九) - 高级类型</h2>
+  <p class="post-date">2018-10-17<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>高级类型(交叉类型,联合类型,类型保护与区分类型,类型别名,字符串字面量类型,数字字面量类型,枚举成员类型,多态的this类型,索引类型,映射类型)我们会对10种进行详情介绍<br><a id="more"></a></p>
+<h3 id="交叉类型-Intersection-Types"><a href="#交叉类型-Intersection-Types" class="headerlink" title="交叉类型(Intersection Types)"></a>交叉类型(Intersection Types)</h3><p>交叉类型是将多个类型合并到一个类型,比如:<code>Fn1 &amp; Fn2 &amp; Fn3</code>同时是<code>Fn1</code>和<code>Fn2</code>和<code>Fn3</code>,这个类型的对象同时拥有这三种类型的成员。</p>
+<p>来看一个混入(<code>mixins</code>)的例子:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>&lt;<span class="title">T</span>, <span class="title">U</span>&gt;(<span class="params">first: T, second: U</span>): <span class="title">T</span> &amp; <span class="title">U</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = &lt;T &amp; U&gt;&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> id <span class="keyword">in</span> first) &#123;</span><br><span class="line">        (&lt;<span class="built_in">any</span>&gt;result)[id] = (&lt;<span class="built_in">any</span>&gt;first)[id];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> id <span class="keyword">in</span> second) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!result.hasOwnProperty(id)) &#123;</span><br><span class="line">            (&lt;<span class="built_in">any</span>&gt;result)[id] = (&lt;<span class="built_in">any</span>&gt;second)[id];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> FnInterface &#123;</span><br><span class="line">    getName(): <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Fn1 &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> name: <span class="built_in">string</span></span>) &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Fn2 <span class="keyword">implements</span> FnInterface &#123;</span><br><span class="line">    getName() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'getName'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> f = extend(<span class="keyword">new</span> Fn1(<span class="string">"mickey"</span>), <span class="keyword">new</span> Fn2());</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> n = f.name; <span class="comment">// mickey</span></span><br><span class="line"></span><br><span class="line">f.getName(); <span class="comment">// getName</span></span><br></pre></td></tr></table></figure>
+<h3 id="联合类型-Union-Types"><a href="#联合类型-Union-Types" class="headerlink" title="联合类型(Union Types)"></a>联合类型(Union Types)</h3><p>联合类型表示一个值可以是几种类型之,用竖线 <code>|</code> 分隔每个类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setWidth</span>(<span class="params">dom: <span class="built_in">any</span>, width: <span class="built_in">string</span> | <span class="built_in">number</span></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    dom.style.width = width</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类型保护与区分类型-Type-Guards-and-Differentiating-Type"><a href="#类型保护与区分类型-Type-Guards-and-Differentiating-Type" class="headerlink" title="类型保护与区分类型(Type Guards and Differentiating Type)"></a>类型保护与区分类型(Type Guards and Differentiating Type)</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pet = getSmallPet();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每一个成员访问都会报错</span></span><br><span class="line"><span class="keyword">if</span> (pet.swim) &#123;</span><br><span class="line">    pet.swim();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (pet.fly) &#123;</span><br><span class="line">    pet.fly();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改上面的代码</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pet = getSmallPet();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((&lt;Fish&gt;pet).swim) &#123;</span><br><span class="line">    (&lt;Fish&gt;pet).swim();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    (&lt;Bird&gt;pet).fly();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用户自定义的类型保护</li>
+</ul>
+<p>TypeScript里的 类型保护机制让它成为了现实。 类型保护就是一些表达式，它们会在运行时检查以确保在某个作用域里的类型。 要定义一个类型保护，我们只要简单地定义一个函数，它的返回值是一个 类型谓词</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFish</span>(<span class="params">pet: Fish | Bird</span>): <span class="title">pet</span> <span class="title">is</span> <span class="title">Fish</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (&lt;Fish&gt;pet).swim !== <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>typeof类型保护</li>
+</ul>
+<p>这些<strong>typeof类型保护</strong>只有两种形式能被识别：typeof v === “typename”和 typeof v !== “typename”， “typename”必须是 “number”， “string”， “boolean”或 “symbol”。 但是TypeScript并不会阻止你与其它字符串比较，语言不会把那些表达式识别为类型保护</p>
+<ul>
+<li>instanceof类型保护</li>
+</ul>
+<p>instanceof类型保护是通过构造函数来细化类型的一种方式<br>instanceof的右侧要求是一个构造函数，TypeScript将细化为:</p>
+<ul>
+<li>此构造函数的 prototype属性的类型，如果它的类型不为 any的话</li>
+<li>构造签名所返回的类型的联合</li>
+</ul>
+<h3 id="类型别名"><a href="#类型别名" class="headerlink" title="类型别名"></a>类型别名</h3><p>类型别名就是给类型起一个新的名字,起别名不会新建一个类型，只是用新的名字来引用那个类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Name = <span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">type</span> NameResolver = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">string</span>;</span><br><span class="line"><span class="keyword">type</span> NameOrResolver = Name | NameResolver;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params">n: NameOrResolver</span>): <span class="title">Name</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> n === <span class="string">'string'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类型别名也可以是泛型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Container&lt;T&gt; = &#123; value: T &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tree&lt;T&gt; = &#123;</span><br><span class="line">    value: T;</span><br><span class="line">    left: Tree&lt;T&gt;;</span><br><span class="line">    right: Tree&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类型别名不能出现在声明右侧的任何地方</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Yikes = <span class="built_in">Array</span>&lt;Yikes&gt;; <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串字面量类型"><a href="#字符串字面量类型" class="headerlink" title="字符串字面量类型"></a>字符串字面量类型</h3><p>字符串字面量类型允许你指定字符串必须的固定值。 在实际应用中，字符串字面量类型可以与联合类型，类型保护和类型别名很好的配合。 通过结合使用这些特性，你可以实现类似枚举类型的字符串</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Easing = <span class="string">"ease-in"</span> | <span class="string">"ease-out"</span> | <span class="string">"ease-in-out"</span>;</span><br><span class="line"><span class="keyword">class</span> UIElement &#123;</span><br><span class="line">    animate(dx: <span class="built_in">number</span>, dy: <span class="built_in">number</span>, easing: Easing) &#123;</span><br><span class="line">        <span class="keyword">if</span> (easing === <span class="string">"ease-in"</span>) &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (easing === <span class="string">"ease-out"</span>) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (easing === <span class="string">"ease-in-out"</span>) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> button = <span class="keyword">new</span> UIElement();</span><br><span class="line">button.animate(<span class="number">0</span>, <span class="number">0</span>, <span class="string">"ease-in"</span>);</span><br><span class="line">button.animate(<span class="number">0</span>, <span class="number">0</span>, <span class="string">"uneasy"</span>); <span class="comment">// error: "uneasy" is not allowed here</span></span><br></pre></td></tr></table></figure>
+<p>字符串字面量类型还可以用于区分函数重载</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function createElement(tagName: "img"): HTMLImageElement;</span><br><span class="line">function createElement(tagName: "input"): HTMLInputElement;</span><br><span class="line"><span class="comment">// ... more overloads ...</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createElement</span>(<span class="params">tagName: <span class="built_in">string</span></span>): <span class="title">Element</span> </span>&#123;</span><br><span class="line">    <span class="comment">// ... code goes here ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数字字面量类型"><a href="#数字字面量类型" class="headerlink" title="数字字面量类型"></a>数字字面量类型</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rollDie</span>(<span class="params"></span>): 1 | 2 | 3 | 4 | 5 | 6 </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="多态的this类型"><a href="#多态的this类型" class="headerlink" title="多态的this类型"></a>多态的<code>this</code>类型</h3><p>多态的 this类型表示的是某个包含类或接口的 子类型。 这被称做 F-bounded多态性。 它能很容易的表现连贯接口间的继承，比如。 在计算器的例子里，在每个操作之后都返回 this类型:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> BasicCalculator &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">constructor</span>(<span class="params"><span class="keyword">protected</span> value: <span class="built_in">number</span> = 0</span>) &#123; &#125;</span><br><span class="line">    <span class="keyword">public</span> currentValue(): <span class="built_in">number</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> add(operand: <span class="built_in">number</span>): <span class="keyword">this</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.value += operand;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> multiply(operand: <span class="built_in">number</span>): <span class="keyword">this</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.value *= operand;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ... other operations go here ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> v = <span class="keyword">new</span> BasicCalculator(<span class="number">2</span>)</span><br><span class="line">            .multiply(<span class="number">5</span>)</span><br><span class="line">            .add(<span class="number">1</span>)</span><br><span class="line">            .currentValue();</span><br></pre></td></tr></table></figure>
+<p>由于这个类使用了 this类型，你可以继承它，新的类可以直接使用之前的方法，不需要做任何的改变</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> ScientificCalculator <span class="keyword">extends</span> BasicCalculator &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">constructor</span>(<span class="params">value = 0</span>) &#123;</span><br><span class="line">        <span class="keyword">super</span>(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> sin() &#123;</span><br><span class="line">        <span class="keyword">this</span>.value = <span class="built_in">Math</span>.sin(<span class="keyword">this</span>.value);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> v = <span class="keyword">new</span> ScientificCalculator(<span class="number">2</span>)</span><br><span class="line">        .multiply(<span class="number">5</span>)</span><br><span class="line">        .sin()</span><br><span class="line">        .add(<span class="number">1</span>)</span><br><span class="line">        .currentValue();</span><br></pre></td></tr></table></figure>
+<h3 id="索引类型-Index-types"><a href="#索引类型-Index-types" class="headerlink" title="索引类型(Index types)"></a>索引类型(Index types)</h3><p>使用索引类型，编译器就能够检查使用了动态属性名的代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pluck</span>(<span class="params">o, names</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> names.map(<span class="function"><span class="params">n</span> =&gt;</span> o[n]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pluck</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">o: T, names: K[]</span>): <span class="title">T</span>[<span class="title">K</span>][] </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> names.map(<span class="function"><span class="params">n</span> =&gt;</span> o[n]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Person &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    age: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person: Person = &#123;</span><br><span class="line">    name: <span class="string">'Jarid'</span>,</span><br><span class="line">    age: <span class="number">35</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> strings: <span class="built_in">string</span>[] = pluck(person, [<span class="string">'name'</span>]); <span class="comment">// ok, string[]</span></span><br></pre></td></tr></table></figure>
+<p>上面代码引入了新的类型操作符<code>keyof T</code>,<code>索引类型查询操作符</code>和<code>T[K]</code>,<code>索引访问操作符</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> personProps: keyof Person; <span class="comment">// 'name' | 'age'</span></span><br></pre></td></tr></table></figure>
+<p>上面代码可以同通过<code>let personProps: &#39;name&#39; | &#39;age&#39;</code>替换,但是如果添加了新的属性到<code>Person</code>里面<code>keyof Person</code>会自动添加新增的属性,因此在使用前不清楚出现的属性名,就可以这样使用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">o: T, name: K</span>): <span class="title">T</span>[<span class="title">K</span>] </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> o[name]; <span class="comment">// o[name] is of type T[K]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>getProperty</code>里的<code>o: T</code>和<code>name: K</code>，意味着<code>o[name]: T[K]</code>。 当你返回<code>T[K]</code>的结果，编译器会实例化键的真实类型，因此 <code>getProperty</code>的返回值类型会随着你需要的属性改变</p>
+<p><code>keyof</code>和<code>T[K]</code>与字符串索引签名进行交互。 如果你有一个带有字符串索引签名的类型，那么<code>keyof T</code>会是<code>string</code>。 并且<code>T[string]</code>为索引签名的类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Map&lt;T&gt; &#123;</span><br><span class="line">    [key: <span class="built_in">string</span>]: T;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> keys: keyof Map&lt;<span class="built_in">number</span>&gt;; <span class="comment">// string</span></span><br><span class="line"><span class="keyword">let</span> value: Map&lt;<span class="built_in">number</span>&gt;[<span class="string">'foo'</span>]; <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
+<h3 id="映射类型"><a href="#映射类型" class="headerlink" title="映射类型"></a>映射类型</h3><p>TypeScript提供了从旧类型中创建新类型的一种方式 — <strong>映射类型</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Readonly&lt;T&gt; = &#123;</span><br><span class="line">    readonly [P <span class="keyword">in</span> keyof T]: T[P];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123;</span><br><span class="line">    [P <span class="keyword">in</span> keyof T]?: T[P];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用如下:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PersonPartial = Partial&lt;Person&gt;;</span><br><span class="line"><span class="keyword">type</span> ReadonlyPerson = Readonly&lt;Person&gt;;</span><br></pre></td></tr></table></figure>
+<p>它的语法与索引签名的语法类型，内部使用了 for .. in。 具有三个部分</p>
+<ul>
+<li>类型变量 K，它会依次绑定到每个属性</li>
+<li>字符串字面量联合的 Keys，它包含了要迭代的属性名的集合</li>
+<li>属性的结果类型</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> NullablePerson = &#123; [P <span class="keyword">in</span> keyof Person]: Person[P] | <span class="literal">null</span> &#125;</span><br><span class="line"><span class="keyword">type</span> PartialPerson = &#123; [P <span class="keyword">in</span> keyof Person]?: Person[P] &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Nullable&lt;T&gt; = &#123; [P <span class="keyword">in</span> keyof T]: T[P] | <span class="literal">null</span> &#125;</span><br><span class="line"><span class="keyword">type</span> Partial&lt;T&gt; = &#123; [P <span class="keyword">in</span> keyof T]?: T[P] &#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码是真正应用中使用到的</p>
+<p>上面介绍了高级类型种的10种类型,这也是日常我们会用到的</p>
+<p>上面我们介绍了<code>TypeScript</code>的高级类型，第十节我们将介绍Symbols</p>
+<blockquote>
+<p>文章参考<a href="https://www.tslang.cn/docs/handbook/variable-declarations.html" target="_blank" rel="noopener">TypeScript中文网</a></p>
+</blockquote>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#TypeScript" >
+    <span class="tag-code">TypeScript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/10/15/typescript入门教程(八) - 类型推断/">
+        <span class="nav-arrow">← </span>
+        
+          TypeScript入门教程(八) - 类型推断
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#交叉类型-Intersection-Types"><span class="toc-nav-text">交叉类型(Intersection Types)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#联合类型-Union-Types"><span class="toc-nav-text">联合类型(Union Types)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#类型保护与区分类型-Type-Guards-and-Differentiating-Type"><span class="toc-nav-text">类型保护与区分类型(Type Guards and Differentiating Type)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#类型别名"><span class="toc-nav-text">类型别名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#字符串字面量类型"><span class="toc-nav-text">字符串字面量类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数字字面量类型"><span class="toc-nav-text">数字字面量类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#多态的this类型"><span class="toc-nav-text">多态的this类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引类型-Index-types"><span class="toc-nav-text">索引类型(Index types)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#映射类型"><span class="toc-nav-text">映射类型</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/10/17/typescript入门教程(九) - 高级类型/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "TypeScript入门教程(九) - 高级类型",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/17/typescript入门教程(九) - 高级类型/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 <span style="font-size:13px;">蜀ICP备17017451号</span> | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <span id="busuanzi_container_site_uv" style="font-size: 13px;">
+      本站总访问量<span id="busuanzi_value_site_uv" style="color:#42b983"></span>次
+    </span>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
