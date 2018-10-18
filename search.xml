@@ -3,13 +3,19 @@
   
     
     <entry>
-      <title></title>
+      <title>TypeScript</title>
       <link href="/2018/10/18/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E4%B8%80)%20-%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8/"/>
       <url>/2018/10/18/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E4%B8%80)%20-%20%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%94%9F%E6%88%90%E5%99%A8/</url>
       
         <content type="html"><![CDATA[<p>迭代器和生成器<br><a id="more"></a></p><h3 id="for-of-语句"><a href="#for-of-语句" class="headerlink" title="for..of 语句"></a>for..of 语句</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someArray = [<span class="number">1</span>, <span class="string">"string"</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> entry of someArray) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(entry); <span class="comment">// 1, "string", false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="for-in-语句"><a href="#for-in-语句" class="headerlink" title="for..in 语句"></a>for..in 语句</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> list) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// "0", "1", "2",</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i of list) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// "4", "5", "6"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>for..of和for..in均可迭代一个列表；但是用于迭代的值却不同，for..in迭代的是对象的 键 的列表，而for..of则迭代对象的键对应的值，for..in可以操作任何对象；它提供了查看对象属性的一种方法。 但是 for..of关注于迭代对象的值</p><p>这节的内容比较简单,所以只是写了几段代码来进行解释</p><p>上面我们介绍了<code>TypeScript</code>的迭代器和生成器，第十二节我们将介绍模块</p><blockquote><p>文章参考<a href="https://www.tslang.cn/docs/handbook/variable-declarations.html" target="_blank" rel="noopener">TypeScript中文网</a></p></blockquote>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> TypeScript </tag>
+            
+        </tags>
       
     </entry>
     
