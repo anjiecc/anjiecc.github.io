@@ -10,7 +10,7 @@
   
   <title>
     
-      TypeScript入门教程(十一) - 迭代器和生成器 | JH
+      TypeScript入门教程(十二) - 模块 | JH
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -196,8 +196,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>TypeScript入门教程(十一) - 迭代器和生成器</h2>
-  <p class="post-date">2018-10-18<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <h2>TypeScript入门教程(十二) - 模块</h2>
+  <p class="post-date">2018-10-20<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -205,12 +205,18 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>迭代器和生成器<br><a id="more"></a></p>
-<h3 id="for-of-语句"><a href="#for-of-语句" class="headerlink" title="for..of 语句"></a>for..of 语句</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someArray = [<span class="number">1</span>, <span class="string">"string"</span>, <span class="literal">false</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> entry of someArray) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(entry); <span class="comment">// 1, "string", false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="for-in-语句"><a href="#for-in-语句" class="headerlink" title="for..in 语句"></a>for..in 语句</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> list = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> list) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// "0", "1", "2",</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i of list) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i); <span class="comment">// "4", "5", "6"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>for..of和for..in均可迭代一个列表；但是用于迭代的值却不同，for..in迭代的是对象的 键 的列表，而for..of则迭代对象的键对应的值，for..in可以操作任何对象；它提供了查看对象属性的一种方法。 但是 for..of关注于迭代对象的值</p>
-<p>这节的内容比较简单,所以只是写了几段代码来进行解释</p>
-<p>上面我们介绍了<code>TypeScript</code>的迭代器和生成器，第十二节我们将介绍模块</p>
+    <section class="markdown-content"><p>模块是在自身的作用域执行,也就是说在一个模块里面声明的变量,类,函数都是在模块中可见,模块外面是不可见的，除非使用<code>export</code>导出,其他模块使用<code>import</code>引入就可以使用其他模块导出的变量,类,函数等<br><a id="more"></a></p>
+<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>任何声明(变量,函数,类,类别别名或接口)都能够通过添加<code>export</code>关键字来导出</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="string">'112'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> Styles &#123;</span><br><span class="line">    width: <span class="built_in">string</span></span><br><span class="line">    height: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> Fn &#123;&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;Fn <span class="keyword">as</span> fn&#125; <span class="comment">// 导出的部分重命名</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'文件路径'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> Styles &#123;&#125; <span class="comment">// 默认导出</span></span><br></pre></td></tr></table></figure>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p>模块的导入操作与导出一样简单。 可以使用以下 import形式之一来导入其它模块中的导出内容</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Fn &#125; <span class="keyword">from</span> <span class="string">'引入的文件路径'</span></span><br><span class="line"><span class="keyword">import</span> &#123;Fn <span class="keyword">as</span> fn &#125; <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 导入内容重命名</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> styles <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 将整个模块导入到一个变量</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 引入文件</span></span><br><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 引入默认导出文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="export-和-import-require"><a href="#export-和-import-require" class="headerlink" title="export = 和 import = require()"></a>export = 和 import = require()</h3><p><code>CommonJS</code>和<code>AMD</code>的环境里都有一个<code>exports</code>变量，这个变量包含了一个模块的所有导出内容。</p>
+<p><code>CommonJS</code>和<code>AMD</code>的<code>exports</code>都可以被赋值为一个对象, 这种情况下其作用就类似于<code>es6</code>语法里的默认导出，即<code>export default</code>语法了。虽然作用相似，但是<code>export default</code>语法并不能兼容<code>CommonJS</code>和<code>AMD</code>的exports。</p>
+<p>为了支持<code>CommonJS</code>和<code>AMD</code>的<code>exports</code>, <code>TypeScript</code>提供了<code>export =</code>语法。</p>
+<p><code>export =</code>语法定义一个模块的导出对象。 这里的对象一词指的是类，接口，命名空间，函数或枚举。</p>
+<p>若使用<code>export =</code>导出一个模块，则必须使用<code>TypeScript</code>的特定语法<code>import module = require(&quot;module&quot;)</code>来导入此模块</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Styles &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> styles: object</span>)</span><br><span class="line">    getStyle(<span class="params">key: <span class="built_in">string</span></span>): number | string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.styles[key]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> = Styles</span><br><span class="line"><span class="comment">// 使用方式如下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Styles = <span class="built_in">require</span>(<span class="string">'文件路径'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> Styles(&#123; width : <span class="number">200</span> &#125;)</span><br><span class="line">s.getStyle(<span class="string">'width'</span>) <span class="comment">// 200</span></span><br></pre></td></tr></table></figure>
+<p>上面我们介绍了<code>TypeScript</code>的模块，第十三节我们将介绍命名空间</p>
 <blockquote>
 <p>文章参考<a href="https://www.tslang.cn/docs/handbook/variable-declarations.html" target="_blank" rel="noopener">TypeScript中文网</a></p>
 </blockquote>
@@ -232,20 +238,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/18/typescript入门教程(十) - Symbols/">
+      <a class="nav-left" href="/2018/10/18/typescript入门教程(十一) - 迭代器和生成器/">
         <span class="nav-arrow">← </span>
         
-          TypeScript入门教程(十) - Symbols
+          TypeScript入门教程(十一) - 迭代器和生成器
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/20/typescript入门教程(十二) - 模块/">
-        
-          TypeScript入门教程(十二) - 模块
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -291,7 +290,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#for-of-语句"><span class="toc-nav-text">for..of 语句</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#for-in-语句"><span class="toc-nav-text">for..in 语句</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#区别"><span class="toc-nav-text">区别</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#导出"><span class="toc-nav-text">导出</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#导入"><span class="toc-nav-text">导入</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#export-和-import-require"><span class="toc-nav-text">export = 和 import = require()</span></a></li></ol>
     
   </div>
 </aside>
@@ -301,7 +300,7 @@
 
 <script>
   (function () {
-    var url = 'http://www.anjiecc.cn/2018/10/18/typescript入门教程(十一) - 迭代器和生成器/';
+    var url = 'http://www.anjiecc.cn/2018/10/20/typescript入门教程(十二) - 模块/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -357,7 +356,7 @@
     var gitmentConfig = "anjiecc";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "TypeScript入门教程(十一) - 迭代器和生成器",
+        id: "TypeScript入门教程(十二) - 模块",
         owner: "anjiecc",
         repo: "anjiecc.github.io",
         oauth: {
@@ -385,7 +384,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://www.anjiecc.cn/2018/10/18/typescript入门教程(十一) - 迭代器和生成器/';
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/20/typescript入门教程(十二) - 模块/';
   
   (function(){
     var dsq = document.createElement('script');
