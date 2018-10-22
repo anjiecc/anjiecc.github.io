@@ -3,6 +3,23 @@
   
     
     <entry>
+      <title>TypeScript入门教程(十四) - 装饰器</title>
+      <link href="/2018/10/22/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E5%9B%9B)%20-%20%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+      <url>/2018/10/22/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E5%9B%9B)%20-%20%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<p>随着<code>TypeScript</code>和<code>ES6</code>里引入了类，在一些场景下我们需要额外的特性来支持标注或修改类及其成员。 装饰器（<code>Decorators</code>）为我们在类的声明及成员上通过元编程语法添加标注提供了一种方式。 <code>Javascript</code>里的装饰器目前处在<code>建议征集的第二阶段</code>，但在<code>TypeScript</code>里已做为一项实验性特性予以支持</p><a id="more"></a><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>若要启用实验性的装饰器特性，你必须在命令行或<code>tsconfig.json</code>里启用<code>experimentalDecorators</code>编译器选项</p><ul><li><p>命令行:</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc --target ES5 --experimentalDecorators</span><br></pre></td></tr></table></figure></li><li><p>tsconfig.json:</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"compilerOptions"</span>: &#123;</span><br><span class="line">        <span class="attr">"target"</span>: <span class="string">"ES5"</span>,</span><br><span class="line">        <span class="attr">"experimentalDecorators"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h3>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> TypeScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>TypeScript入门教程(十三) - 命名空间</title>
       <link href="/2018/10/22/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E4%B8%89)%20-%20%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/"/>
       <url>/2018/10/22/typescript%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B(%E5%8D%81%E4%B8%89)%20-%20%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/</url>
