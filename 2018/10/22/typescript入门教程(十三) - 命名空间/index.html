@@ -10,7 +10,7 @@
   
   <title>
     
-      TypeScript入门教程(十二) - 模块 | JH
+      TypeScript入门教程(十三) - 命名空间 | JH
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -196,8 +196,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>TypeScript入门教程(十二) - 模块</h2>
-  <p class="post-date">2018-10-20<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <h2>TypeScript入门教程(十三) - 命名空间</h2>
+  <p class="post-date">2018-10-22<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -205,22 +205,18 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>模块是在自身的作用域执行,也就是说在一个模块里面声明的变量,类,函数都是在模块中可见,模块外面是不可见的，除非使用<code>export</code>导出,其他模块使用<code>import</code>引入就可以使用其他模块导出的变量,类,函数等<br><a id="more"></a></p>
-<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>任何声明(变量,函数,类,类别别名或接口)都能够通过添加<code>export</code>关键字来导出</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="string">'112'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> Styles &#123;</span><br><span class="line">    width: <span class="built_in">string</span></span><br><span class="line">    height: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> Fn &#123;&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;Fn <span class="keyword">as</span> fn&#125; <span class="comment">// 导出的部分重命名</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'文件路径'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> Styles &#123;&#125; <span class="comment">// 默认导出</span></span><br></pre></td></tr></table></figure>
-<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p>模块的导入操作与导出一样简单。 可以使用以下 import形式之一来导入其它模块中的导出内容</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Fn &#125; <span class="keyword">from</span> <span class="string">'引入的文件路径'</span></span><br><span class="line"><span class="keyword">import</span> &#123;Fn <span class="keyword">as</span> fn &#125; <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 导入内容重命名</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> styles <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 将整个模块导入到一个变量</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 引入文件</span></span><br><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'引入的文件路径'</span> <span class="comment">// 引入默认导出文件</span></span><br></pre></td></tr></table></figure>
-<h3 id="export-和-import-require"><a href="#export-和-import-require" class="headerlink" title="export = 和 import = require()"></a>export = 和 import = require()</h3><p><code>CommonJS</code>和<code>AMD</code>的环境里都有一个<code>exports</code>变量，这个变量包含了一个模块的所有导出内容。</p>
-<p><code>CommonJS</code>和<code>AMD</code>的<code>exports</code>都可以被赋值为一个对象, 这种情况下其作用就类似于<code>es6</code>语法里的默认导出，即<code>export default</code>语法了。虽然作用相似，但是<code>export default</code>语法并不能兼容<code>CommonJS</code>和<code>AMD</code>的exports。</p>
-<p>为了支持<code>CommonJS</code>和<code>AMD</code>的<code>exports</code>, <code>TypeScript</code>提供了<code>export =</code>语法。</p>
-<p><code>export =</code>语法定义一个模块的导出对象。 这里的对象一词指的是类，接口，命名空间，函数或枚举。</p>
-<p>若使用<code>export =</code>导出一个模块，则必须使用<code>TypeScript</code>的特定语法<code>import module = require(&quot;module&quot;)</code>来导入此模块</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Styles &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> styles: object</span>)</span><br><span class="line">    getStyle(<span class="params">key: <span class="built_in">string</span></span>): number | string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.styles[key]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> = Styles</span><br><span class="line"><span class="comment">// 使用方式如下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Styles = <span class="built_in">require</span>(<span class="string">'文件路径'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> s = <span class="keyword">new</span> Styles(&#123; width : <span class="number">200</span> &#125;)</span><br><span class="line">s.getStyle(<span class="string">'width'</span>) <span class="comment">// 200</span></span><br></pre></td></tr></table></figure>
-<p>上面我们介绍了<code>TypeScript</code>的模块，第十三节我们将介绍命名空间</p>
+    <section class="markdown-content"><p>描述了如何在TypeScript里使用命名空间（之前叫做“内部模块”）来组织你的代码。任何使用<code>module</code>关键字来声明一个内部模块的地方都应该使用<code>namespace</code>关键字来替换<br><a id="more"></a></p>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>使用命名空间不用担心与其它对象产生命名冲突</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Validation &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">interface</span> StringValidator &#123;</span><br><span class="line">        isAcceptable(s: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$/</span>;</span><br><span class="line">    <span class="keyword">const</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">class</span> LettersOnlyValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">        isAcceptable(s: <span class="built_in">string</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> lettersRegexp.test(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">class</span> ZipCodeValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">        isAcceptable(s: <span class="built_in">string</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> s.length === <span class="number">5</span> &amp;&amp; numberRegexp.test(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Some samples to try</span></span><br><span class="line"><span class="keyword">let</span> strings = [<span class="string">"Hello"</span>, <span class="string">"98052"</span>, <span class="string">"101"</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Validators to use</span></span><br><span class="line"><span class="keyword">let</span> validators: &#123; [s: <span class="built_in">string</span>]: Validation.StringValidator; &#125; = &#123;&#125;;</span><br><span class="line">validators[<span class="string">"ZIP code"</span>] = <span class="keyword">new</span> Validation.ZipCodeValidator();</span><br><span class="line">validators[<span class="string">"Letters only"</span>] = <span class="keyword">new</span> Validation.LettersOnlyValidator();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Show whether each string passed each validator</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> s of strings) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> name <span class="keyword">in</span> validators) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`"<span class="subst">$&#123; s &#125;</span>" - <span class="subst">$&#123; validators[name].isAcceptable(s) ? "matches" : "does not match" &#125;</span> <span class="subst">$&#123; name &#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>另一种简化命名空间操作的方法是使用import q = x.y.z给常用的对象起一个短的名字。 不要与用来加载模块的 import x = require(‘name’)语法弄混了，这里的语法是为指定的符号创建一个别名。 你可以用这种方法为任意标识符创建别名，也包括导入的模块中的对象</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Shapes &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">namespace</span> Polygons &#123;</span><br><span class="line">        <span class="keyword">export</span> <span class="keyword">class</span> Triangle &#123; &#125;</span><br><span class="line">        <span class="keyword">export</span> <span class="keyword">class</span> Square &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> polygons = Shapes.Polygons;</span><br><span class="line"><span class="keyword">let</span> sq = <span class="keyword">new</span> polygons.Square(); <span class="comment">// Same as "new Shapes.Polygons.Square()"</span></span><br></pre></td></tr></table></figure>
+<h3 id="外部命名空间"><a href="#外部命名空间" class="headerlink" title="外部命名空间"></a>外部命名空间</h3><p>流行的程序库D3在全局对象d3里定义它的功能。 因为这个库通过一个 <script>标签加载（不是通过模块加载器），它的声明文件使用内部模块来定义它的类型。 为了让TypeScript编译器识别它的类型，我们使用外部命名空间声明。 比如，我们可以像下面这样写</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="keyword">namespace</span> D3 &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">interface</span> Selectors &#123;</span><br><span class="line">        select: &#123;</span><br><span class="line">            (selector: <span class="built_in">string</span>): Selection;</span><br><span class="line">            (element: EventTarget): Selection;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">interface</span> Event &#123;</span><br><span class="line">        x: <span class="built_in">number</span>;</span><br><span class="line">        y: <span class="built_in">number</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">interface</span> Base <span class="keyword">extends</span> Selectors &#123;</span><br><span class="line">        event: Event;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="keyword">var</span> d3: D3.Base;</span><br></pre></td></tr></table></figure>
+<p>上面我们介绍了<code>TypeScript</code>的命名空间，第十四节我们将介绍装饰器</p>
 <blockquote>
-<p>文章参考<a href="https://www.tslang.cn/docs/handbook/variable-declarations.html" target="_blank" rel="noopener">TypeScript中文网</a></p>
+<p>文章参考<a href="https://www.tslang.cn/docs/handbook/variable-declarations.html">TypeScript中文网</a></p>
 </blockquote>
-</section>
+</script></p></section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -238,20 +234,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/10/18/typescript入门教程(十一) - 迭代器和生成器/">
+      <a class="nav-left" href="/2018/10/20/typescript入门教程(十二) - 模块/">
         <span class="nav-arrow">← </span>
         
-          TypeScript入门教程(十一) - 迭代器和生成器
+          TypeScript入门教程(十二) - 模块
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/10/22/typescript入门教程(十三) - 命名空间/">
-        
-          TypeScript入门教程(十三) - 命名空间
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -297,7 +286,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#导出"><span class="toc-nav-text">导出</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#导入"><span class="toc-nav-text">导入</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#export-和-import-require"><span class="toc-nav-text">export = 和 import = require()</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#命名空间"><span class="toc-nav-text">命名空间</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#别名"><span class="toc-nav-text">别名</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#外部命名空间"><span class="toc-nav-text">外部命名空间</span></a></li></ol>
     
   </div>
 </aside>
@@ -307,7 +296,7 @@
 
 <script>
   (function () {
-    var url = 'http://www.anjiecc.cn/2018/10/20/typescript入门教程(十二) - 模块/';
+    var url = 'http://www.anjiecc.cn/2018/10/22/typescript入门教程(十三) - 命名空间/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -363,7 +352,7 @@
     var gitmentConfig = "anjiecc";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "TypeScript入门教程(十二) - 模块",
+        id: "TypeScript入门教程(十三) - 命名空间",
         owner: "anjiecc",
         repo: "anjiecc.github.io",
         oauth: {
@@ -391,7 +380,7 @@
 <script>
   var disqus_shortname = '';
   
-  var disqus_url = 'http://www.anjiecc.cn/2018/10/20/typescript入门教程(十二) - 模块/';
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/22/typescript入门教程(十三) - 命名空间/';
   
   (function(){
     var dsq = document.createElement('script');
