@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      CSS BEM书写规范 | JH
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <style>
+  .menu-author-wrap {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  .menu-author-wrap .menu-author-wrap-bg {
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .menu-author-wrap-img {
+    padding-top: 10%;
+  }
+  .menu-author-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #9e9d9d;
+  }
+  .menu-author-wrap h3{
+    margin: 5px 0
+  }
+  .menu-author-wrap .description {
+    font-size: 12px;
+    color: #de9898;
+  }
+  .menu-list li {
+    padding: 0;
+    text-align: left;
+  }
+  .menu-list .menu-link {
+    display: block;
+    padding: 10px 0px 10px 15px;
+  }
+</style>
+<header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>JH</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask-level"></div>
+    <div class="menu-mask">
+      <div class="menu-author-wrap">
+          <div class="menu-author-wrap-bg" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+          <div class="menu-author-wrap-img">
+            <img src="https://avatars2.githubusercontent.com/u/16866569?v=4" />
+          </div>
+          <h3>Xiaoai</h3>
+          <p class="description">Whatever is worth doing is worth doing well</p>
+          <p class="description">风雪是你,平淡是你;清贫是你,荣华是你;心底温柔是你,目光所至也是你@hui</p>
+          <a href="mailto:xiaoai7904@gmail.com">xiaoai7904@gmail.com</a>
+      </div>
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>CSS BEM书写规范</h2>
+  <p class="post-date">2018-10-31<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><code>BEM</code>的意思就是块（<code>block</code>）、元素（<code>element</code>）、修饰符（<code>modifier</code>）,是由<a href="https://yandex.ru/" target="_blank" rel="noopener">Yandex</a>团队提出的一种前端命名方法论。这种巧妙的命名方法让你的CSS类对其他开发者来说更加透明而且更有意义。BEM命名约定更加严格，而且包含更多的信息，它们用于一个团队开发一个耗时的大项目<br><a id="more"></a></p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>如果你是一个<code>Vue</code>爱好者，并且你是一个喜欢接受新鲜事物和追求技术高度,那么你一定使用或者知道<a href="http://element.eleme.io/#/zh-CN" target="_blank" rel="noopener">Element-Ui</a>(或者其他UI库),在<code>element-ui</code>中你去观察它的源码你会发现它的组件<code>css</code>的定义方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">include</span> b(tree-node) &#123;</span><br><span class="line">  <span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</span><br><span class="line">  <span class="selector-tag">outline</span>: <span class="selector-tag">none</span>;</span><br><span class="line">  &amp;<span class="selector-pseudo">:focus</span> &#123; <span class="comment">/* focus */</span></span><br><span class="line">    &gt; .el-tree-node__content &#123;</span><br><span class="line">      background-color: $--tree-node-hover-color;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @<span class="keyword">include</span> when(drop-inner) &#123;</span><br><span class="line">    &gt; <span class="selector-class">.el-tree-node__content</span> <span class="selector-class">.el-tree-node__label</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: $--color-primary;</span><br><span class="line">      <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码是<code>element-ui</code>中组件<code>tree</code>组件的部分样式</p>
+<p>不难从上面代码中可以看到<code>element-ui</code>是怎么来命名<code>class</code>类名和<code>sass</code>变量都使用了<code>-</code>,<code>__</code>,’–’这个连字符,下面我们介绍为什么要这样写,这样写的好处是什么</p>
+<h3 id="BEM"><a href="#BEM" class="headerlink" title="BEM"></a>BEM</h3><p><code>BEM</code>代表“<code>块（block</code>）,<code>元素（element</code>）,<code>修饰符（modifier</code>”,我们常用这三个实体开发组件。</p>
+<p>在选择器中，由以下三种符合来表示扩展的关系:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-  中划线 ：仅作为连字符使用，表示某个块或者某个子元素的多单词之间的连接记号</span><br><span class="line">__  双下划线：双下划线用来连接块和块的子元素</span><br><span class="line">_   单下划线：单下划线用来描述一个块或者块的子元素的一种状态</span><br><span class="line"></span><br><span class="line">type-block__element_modifier</span><br></pre></td></tr></table></figure>
+<h4 id="块（block）"><a href="#块（block）" class="headerlink" title="块（block）"></a>块（block）</h4><p>一个块是设计或布局的一部分，它有具体且唯一地意义 ，要么是语义上的要么是视觉上的</p>
+<p>例如我们有一个菜单列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>类名<code>menu</code>就是代表菜单这个<code>块</code>或者<code>区域</code></p>
+<h4 id="元素（element）"><a href="#元素（element）" class="headerlink" title="元素（element）"></a>元素（element）</h4><p>块中的子元素是块的子元素，并且子元素的子元素在 bem 里也被认为是块的直接子元素。一个块中元素的类名必须用父级块的名称作为前缀</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu__item"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu__item"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>类名<code>menu__item</code>中的<code>__item</code>就是代表元素项</p>
+<h4 id="修饰符（modifier）"><a href="#修饰符（modifier）" class="headerlink" title="修饰符（modifier）"></a>修饰符（modifier）</h4><p>一个“修饰符”可以理解为一个块的特定状态，标识着它持有一个特定的属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu__item menu__item-actived"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu__item"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>类名<code>menu__item-actived</code>中的<code>-actived</code>代表修饰符</p>
+<h3 id="可供选择的命名方案"><a href="#可供选择的命名方案" class="headerlink" title="可供选择的命名方案"></a>可供选择的命名方案</h3><p><code>BEM</code>只是一种命名约定方案不一定要按照固定写法来执行,主要是在项目中要保持一致的命名约定即可</p>
+<p>下面有几种方案提供参考</p>
+<h4 id="Two-Dashes-style（双连字符风格）"><a href="#Two-Dashes-style（双连字符风格）" class="headerlink" title="Two Dashes style（双连字符风格）"></a>Two Dashes style（双连字符风格）</h4><p><code>block-name__elem-name--mod-name</code></p>
+<ul>
+<li>名字全部使用小写</li>
+<li>BEM 实体的名称中的每一个单词使用一个连字符分隔</li>
+<li>使用双下划线（__）将元素的名称和模块的名称分离开</li>
+<li>使用双连字符（–）分隔 Boolean 类型的修饰符</li>
+<li>不使用 key-value 类型的修饰符</li>
+</ul>
+<h4 id="CamelCase-style（驼峰命名风格）"><a href="#CamelCase-style（驼峰命名风格）" class="headerlink" title="CamelCase style（驼峰命名风格）"></a>CamelCase style（驼峰命名风格）</h4><p><code>MyBlock__SomeElem_modName_modVla</code></p>
+<p>这种风格的命名方案的不同点在于，在<code>BEM</code>实体中分隔单词时使用驼峰命名法代替了一个连字符（<code>-</code>）</p>
+<h4 id="“Sans-underscore”-style（无下划线风格）"><a href="#“Sans-underscore”-style（无下划线风格）" class="headerlink" title="“Sans underscore” style（无下划线风格）"></a>“Sans underscore” style（无下划线风格）</h4><p><code>blockName-elemName--modName--modVal</code></p>
+<ul>
+<li>名称使用驼峰命名法书写</li>
+<li>元素名称与模块名称使用一个连字符（-）分隔</li>
+<li>修饰符使用双连字符（–）与模块或元素分隔</li>
+<li>修饰符的名称和值使用双连字符（–）分隔</li>
+</ul>
+<p><code>BEM</code>方法论为<code>BEM</code>实体的命名提供了基本的原则。选择哪一种命名方式取决于你项目的需求和你的个人喜好。使用方法论中提到的命名约定的一大优势在于具有现成的面向“经典命名”的开发工具</p>
+<blockquote>
+<p>文章参考  <a href="https://www.jianshu.com/p/410a71771d78" target="_blank" rel="noopener">译】BEM CSS命名规范三 Naming convention</a><br><a href="https://www.w3cschool.cn/weflow/weflow-bem.html" target="_blank" rel="noopener">W3cschool</a><br><a href="https://docs.emmet.io/filters/bem/" target="_blank" rel="noopener">Yandex BEM/OOCSS</a></p>
+</blockquote>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Css" >
+    <span class="tag-code">Css</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/10/22/typescript入门教程(十四) - 装饰器/">
+        <span class="nav-arrow">← </span>
+        
+          TypeScript入门教程(十四) - 装饰器
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#BEM"><span class="toc-nav-text">BEM</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#块（block）"><span class="toc-nav-text">块（block）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#元素（element）"><span class="toc-nav-text">元素（element）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#修饰符（modifier）"><span class="toc-nav-text">修饰符（modifier）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#可供选择的命名方案"><span class="toc-nav-text">可供选择的命名方案</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Two-Dashes-style（双连字符风格）"><span class="toc-nav-text">Two Dashes style（双连字符风格）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#CamelCase-style（驼峰命名风格）"><span class="toc-nav-text">CamelCase style（驼峰命名风格）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#“Sans-underscore”-style（无下划线风格）"><span class="toc-nav-text">“Sans underscore” style（无下划线风格）</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/10/31/CSS BEM书写规范/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "CSS BEM书写规范",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/10/31/CSS BEM书写规范/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 <span style="font-size:13px;">蜀ICP备17017451号</span> | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <span id="busuanzi_container_site_uv" style="font-size: 13px;">
+      本站总访问量<span id="busuanzi_value_site_uv" style="color:#42b983"></span>次
+    </span>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
