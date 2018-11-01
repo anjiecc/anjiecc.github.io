@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      FromData Blob ArrayBuffer | JH
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <style>
+  .menu-author-wrap {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  .menu-author-wrap .menu-author-wrap-bg {
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .menu-author-wrap-img {
+    padding-top: 10%;
+  }
+  .menu-author-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #9e9d9d;
+  }
+  .menu-author-wrap h3{
+    margin: 5px 0
+  }
+  .menu-author-wrap .description {
+    font-size: 12px;
+    color: #de9898;
+  }
+  .menu-list li {
+    padding: 0;
+    text-align: left;
+  }
+  .menu-list .menu-link {
+    display: block;
+    padding: 10px 0px 10px 15px;
+  }
+</style>
+<header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>JH</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask-level"></div>
+    <div class="menu-mask">
+      <div class="menu-author-wrap">
+          <div class="menu-author-wrap-bg" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+          <div class="menu-author-wrap-img">
+            <img src="https://avatars2.githubusercontent.com/u/16866569?v=4" />
+          </div>
+          <h3>Xiaoai</h3>
+          <p class="description">Whatever is worth doing is worth doing well</p>
+          <p class="description">风雪是你,平淡是你;清贫是你,荣华是你;心底温柔是你,目光所至也是你@hui</p>
+          <a href="mailto:xiaoai7904@gmail.com">xiaoai7904@gmail.com</a>
+      </div>
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>FromData Blob ArrayBuffer</h2>
+  <p class="post-date">2018-11-01<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>利用<code>FormData</code>对象,我们可以通过<code>JavaScript</code>用一些键值对来模拟一系列表单控件,我们还可以使用<code>XMLHttpRequest</code>的<code>send()</code>方法来异步的提交这个”表单”,<code>Blob</code>对象表示一个不可变、原始数据的类文件对象,<code>ArrayBuffer</code>对象用来表示通用的、固定长度的原始二进制数据缓冲区<br><a id="more"></a></p>
+<h3 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h3><blockquote>
+<p>XMLHttpRequest Level 2添加了一个新的接口FormData.利用FormData对象,我们可以通过JavaScript用一些键值对来模拟一系列表单控件,我们还可以使用XMLHttpRequest的send()方法来异步的提交这个”表单”.比起普通的ajax,使用FormData的最大优点就是我们可以异步上传一个二进制文件</p>
+</blockquote>
+<p>上文是<a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN</a>官方解释,在实际开发中我们可以利用它来进行做上传文件操作,下面代码简单介绍了<code>FormData</code>如何使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr= <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">let</span> fromdata = <span class="keyword">new</span> FormData()</span><br><span class="line">formdata.append(<span class="string">"token"</span>, <span class="string">'ddddd-ddd-dd'</span>);</span><br><span class="line">xhr.open(<span class="string">"POST"</span>, <span class="string">"xxx.php"</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+<h4 id="api"><a href="#api" class="headerlink" title="api"></a>api</h4><p><strong>append() 给当前FormData对象添加一个键/值对</strong><br><code>void append(DOMString name, Blob value, optional DOMString filename)</code></p>
+<ul>
+<li>name: 字段名称</li>
+<li>value: 字段值.可以是,或者一个字符串,如果全都不是,则该值会被自动转换成字符串</li>
+<li>filename[可选] 指定文件的文件名,当value参数被指定为一个Blob对象或者一个File对象时,该文件名会被发送到服务器上,对于Blob对象来说,这个值默认为”blob”)</li>
+</ul>
+<h3 id="Blob"><a href="#Blob" class="headerlink" title="Blob"></a>Blob</h3><p><code>Blob</code>即二进制大数据对象,提供相应的接口,其他操作二进制的对象都是建立在<code>Blob</code>基础之上,并继承了该对象的属性和方法</p>
+<ul>
+<li>使用 Blob 创建一个指向类型化数组的URL<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> typedArray = GetTheTypedArraySomehow();</span><br><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([typedArray], &#123;<span class="attr">type</span>: <span class="string">"application/octet-binary"</span>&#125;);<span class="comment">// 传入一个合适的MIME类型</span></span><br><span class="line"><span class="keyword">var</span> url = URL.createObjectURL(blob);</span><br><span class="line"><span class="comment">// 会产生一个类似blob:d3958f5c-0777-0845-9dcf-2cb28783acaf 这样的URL字符串</span></span><br><span class="line"><span class="comment">// 你可以像使用一个普通URL那样使用它，比如用在img.src上</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="api-1"><a href="#api-1" class="headerlink" title="api"></a>api</h4><ul>
+<li><code>Blob.size</code>[只读]  <code>Blob</code>对象中所包含数据的大小（字节）</li>
+<li><code>Blob.type</code>[只读]  一个字符串，表明该Blob对象所包含数据的MIME类型。如果类型未知，则该值为空字符串</li>
+<li><code>Blob.slice(start,end)</code> 返回一个新的 Blob对象，包含了源 Blob对象中指定范围内的数据</li>
+</ul>
+<h3 id="ArrayBuffer"><a href="#ArrayBuffer" class="headerlink" title="ArrayBuffer"></a>ArrayBuffer</h3><p><code>ArrayBuffer</code>对象用来表示通用的、固定长度的原始二进制数据缓冲区。<code>ArrayBuffer</code>不能直接操作，而是要通过类型数组对象或 DataView 对象来操作，它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个8字节的ArrayBuffer  </span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">8</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建一个指向b的视图v1，采用Int32类型，开始于默认的字节索引0，直到缓冲区的末尾  </span></span><br><span class="line"><span class="keyword">var</span> v1 = <span class="keyword">new</span> <span class="built_in">Int32Array</span>(b);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建一个指向b的视图v2，采用Uint8类型，开始于字节索引2，直到缓冲区的末尾  </span></span><br><span class="line"><span class="keyword">var</span> v2 = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(b, <span class="number">2</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建一个指向b的视图v3，采用Int16类型，开始于字节索引2，长度为2  </span></span><br><span class="line"><span class="keyword">var</span> v3 = <span class="keyword">new</span> <span class="built_in">Int16Array</span>(b, <span class="number">2</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="api-2"><a href="#api-2" class="headerlink" title="api"></a>api</h4><ul>
+<li><code>new ArrayBuffer(length)</code><br><code>length</code>要创建的 ArrayBuffer 的大小，单位为字节,返回一个指定大小的 ArrayBuffer 对象，其内容被初始化为 0</li>
+</ul>
+<ul>
+<li><code>get ArrayBuffer[@@species]</code><br>返回 ArrayBuffer 的构造函数</li>
+</ul>
+<ul>
+<li><p><code>ArrayBuffer.isView(arg)</code><br>如果参数是 ArrayBuffer 的视图实例则返回 true，例如 类型数组对象 或 DataView 对象；否则返回 false</p>
+</li>
+<li><p><code>ArrayBuffer.transfer(oldBuffer [, newByteLength])</code><br>返回一个新的 ArrayBuffer 对象，其内容取自 oldBuffer 中的数据，并且根据 newByteLength 的大小对数据进行截取或补 0</p>
+</li>
+</ul>
+<ul>
+<li><code>ArrayBuffer.slice()</code><br>返回一个新的 ArrayBuffer ，它的内容是这个 ArrayBuffer 的字节副本，从begin（包括），到end（不包括）。如果begin或end是负数，则指的是从数组末尾开始的索引，而不是从头开始</li>
+</ul>
+<blockquote>
+<p>文章参考<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer" target="_blank" rel="noopener">ArrayBuffer-MDN</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob" target="_blank" rel="noopener">Blob-MDN</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData" target="_blank" rel="noopener">FormData-MDN</a></p>
+</blockquote>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/10/31/CSS BEM书写规范/">
+        <span class="nav-arrow">← </span>
+        
+          CSS BEM书写规范
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FormData"><span class="toc-nav-text">FormData</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#api"><span class="toc-nav-text">api</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Blob"><span class="toc-nav-text">Blob</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#api-1"><span class="toc-nav-text">api</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ArrayBuffer"><span class="toc-nav-text">ArrayBuffer</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#api-2"><span class="toc-nav-text">api</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/11/01/FormData Blob ArrayBuffer/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "FromData Blob ArrayBuffer",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/11/01/FormData Blob ArrayBuffer/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 <span style="font-size:13px;">蜀ICP备17017451号</span> | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <span id="busuanzi_container_site_uv" style="font-size: 13px;">
+      本站总访问量<span id="busuanzi_value_site_uv" style="color:#42b983"></span>次
+    </span>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
