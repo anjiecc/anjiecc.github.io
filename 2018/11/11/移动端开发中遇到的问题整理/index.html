@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      移动端开中遇到的问题整理 | JH
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <style>
+  .menu-author-wrap {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  .menu-author-wrap .menu-author-wrap-bg {
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .menu-author-wrap-img {
+    padding-top: 10%;
+  }
+  .menu-author-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #9e9d9d;
+  }
+  .menu-author-wrap h3{
+    margin: 5px 0
+  }
+  .menu-author-wrap .description {
+    font-size: 12px;
+    color: #de9898;
+  }
+  .menu-list li {
+    padding: 0;
+    text-align: left;
+  }
+  .menu-list .menu-link {
+    display: block;
+    padding: 10px 0px 10px 15px;
+  }
+</style>
+<header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>JH</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask-level"></div>
+    <div class="menu-mask">
+      <div class="menu-author-wrap">
+          <div class="menu-author-wrap-bg" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+          <div class="menu-author-wrap-img">
+            <img src="https://avatars2.githubusercontent.com/u/16866569?v=4" />
+          </div>
+          <h3>Xiaoai</h3>
+          <p class="description">Whatever is worth doing is worth doing well</p>
+          <p class="description">风雪是你,平淡是你;清贫是你,荣华是你;心底温柔是你,目光所至也是你@hui</p>
+          <a href="mailto:xiaoai7904@gmail.com">xiaoai7904@gmail.com</a>
+      </div>
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>移动端开中遇到的问题整理</h2>
+  <p class="post-date">2018-11-11<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>在日常开发中移动端遇到的问题进行一个整理，方便后面查看<br><a id="more"></a></p>
+<ul>
+<li>弹出遮罩滚动条事件穿透</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一:</span></span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二:</span></span><br><span class="line">.scroll &#123;</span><br><span class="line">    position: fixed;</span><br><span class="line">    width: <span class="number">100</span>%;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> scroll = (<span class="function"><span class="keyword">function</span> (<span class="params">className</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scrollTop;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        afterOpen: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            scrollTop = <span class="built_in">document</span>.scrollingElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">            <span class="built_in">document</span>.body.classList.add(className);</span><br><span class="line">            <span class="built_in">document</span>.body.style.top = -scrollTop + <span class="string">'px'</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        beforeClose: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">document</span>.body.classList.remove(className);</span><br><span class="line">            <span class="built_in">document</span>.scrollingElement.scrollTop = scrollTop;</span><br><span class="line">            <span class="built_in">document</span>.body.scrollTop = scrollTop;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)(<span class="string">'scroll'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>IOS滚动条卡顿问题</li>
+</ul>
+<p>以下代码可解决这种卡顿的问题：<code>-webkit-overflow-scrolling: touch;</code>，是因为这行代码启用了硬件加速特性，所以滑动很流畅</p>
+<p>推荐一个插件<a href="https://github.com/cubiq/iscroll" target="_blank" rel="noopener">iScroll</a></p>
+<ul>
+<li>微信浏览器用户调整字体大小后页面矬了，怎么阻止用户调整</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码可使Android机页面不再受用户字体缩放强制改变大小，但是会有1S左右延时，期间可以考虑loading来处理</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) == <span class="string">"undefined"</span>) &#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">"WeixinJSBridgeReady"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            WeixinJSBridge.invoke(<span class="string">'setFontSizeCallback'</span>, &#123; <span class="string">'fontSize'</span>:<span class="number">0</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">                alert(<span class="built_in">JSON</span>.stringify(res));</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;, <span class="number">0</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        WeixinJSBridge.invoke(<span class="string">'setFontSizeCallback'</span>, &#123; <span class="string">'fontSize'</span>:<span class="number">0</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">            alert(<span class="built_in">JSON</span>.stringify(res));</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;, <span class="number">0</span>)   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//IOS下可使用 -webkit-text-size-adjust禁止用户调整字体大小</span></span><br><span class="line">body &#123; -webkit-text-size-adjust:<span class="number">100</span>%!important; &#125;</span><br><span class="line"><span class="comment">//最好的解决方案：最好使用rem或百分比布局</span></span><br><span class="line"></span><br><span class="line">作者：我是大师兄啊</span><br><span class="line">链接：https:<span class="comment">//www.jianshu.com/p/220b56eb20e9</span></span><br><span class="line">來源：简书</span><br><span class="line">简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>屏幕旋转的事件和样式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">orientInit</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> orientChk = <span class="built_in">document</span>.documentElement.clientWidth &gt; <span class="built_in">document</span>.documentElement.clientHeight?<span class="string">'landscape'</span>:<span class="string">'portrait'</span>;</span><br><span class="line">    <span class="keyword">if</span>(orientChk ==<span class="string">'lapdscape'</span>)&#123;</span><br><span class="line">        <span class="comment">//这里是横屏下需要执行的事件</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//这里是竖屏下需要执行的事件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">orientInit();</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'onorientationchange'</span> <span class="keyword">in</span> <span class="built_in">window</span>?<span class="string">'orientationchange'</span>:<span class="string">'resize'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    setTimeout(orientInit, <span class="number">100</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>)</span><br><span class="line"><span class="comment">//CSS处理</span></span><br><span class="line"><span class="comment">//竖屏时样式</span></span><br><span class="line">@media all and (orientation:portrait)&#123;   &#125;</span><br><span class="line"><span class="comment">//横屏时样式</span></span><br><span class="line">@media all and (orientation:landscape)&#123;   &#125;</span><br><span class="line"></span><br><span class="line">作者：我是大师兄啊</span><br><span class="line">链接：https:<span class="comment">//www.jianshu.com/p/220b56eb20e9</span></span><br><span class="line">來源：简书</span><br><span class="line">简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>audio元素和video元素在ios和andriod中无法自动播放</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"music/bg.mp3"</span> <span class="attr">autoplay</span> <span class="attr">loop</span> <span class="attr">controls</span>&gt;</span>你的浏览器还不支持哦<span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>=<span class="string">"controls"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"music/bg.ogg"</span> <span class="attr">type</span>=<span class="string">"audio/ogg"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"music/bg.mp3"</span> <span class="attr">type</span>=<span class="string">"audio/mpeg"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">    优先播放音乐bg.ogg，不支持在播放bg.mp3</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//JS绑定自动播放（操作window时，播放音乐）</span></span><br><span class="line">$(<span class="built_in">window</span>).one(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    music.play();</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//微信下兼容处理</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"WeixinJSBridgeReady"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    music.play();</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//小结</span></span><br><span class="line"><span class="comment">//1.audio元素的autoplay属性在IOS及Android上无法使用，在PC端正常</span></span><br><span class="line"><span class="comment">//2.audio元素没有设置controls时，在IOS及Android会占据空间大小，而在PC端Chrome是不会占据任何空间</span></span><br><span class="line"></span><br><span class="line">作者：我是大师兄啊</span><br><span class="line">链接：https:<span class="comment">//www.jianshu.com/p/220b56eb20e9</span></span><br><span class="line">來源：简书</span><br><span class="line">简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重力感应事件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 运用HTML5的deviceMotion，调用重力感应事件</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.DeviceMotionEvent)&#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'devicemotion'</span>, deviceMotionHandler, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> speed = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">var</span> x = y = z = lastX = lastY = lastZ = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deviceMotionHandler</span>(<span class="params">eventData</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> acceleration = event.accelerationIncludingGravity;</span><br><span class="line">    x = acceleration.x;</span><br><span class="line">    y = acceleration.y; </span><br><span class="line">    z = acceleration.z;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(x-lastX)&gt;speed || <span class="built_in">Math</span>.abs(y-lastY)&gt;speed || <span class="built_in">Math</span>.abs(z-lastZ)&gt;speed )&#123;</span><br><span class="line">        <span class="comment">//这里是摇动后要执行的方法 </span></span><br><span class="line">        yaoAfter();</span><br><span class="line">    &#125;</span><br><span class="line">    lastX = x;</span><br><span class="line">    lastY = y;</span><br><span class="line">    lastZ = z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">yaoAfter</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>开启硬件加速 </li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translate3d</span>(0,0,0);</span><br><span class="line">    <span class="attribute">-moz-transform</span>: <span class="built_in">translate3d</span>(0,0,0);</span><br><span class="line">    <span class="attribute">-ms-transform</span>: <span class="built_in">translate3d</span>(0,0,0);</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(0,0,0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>消除transition闪屏</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">    <span class="attribute">-webkit-backface-visibility</span>: hidden;</span><br><span class="line">    <span class="attribute">-webkit-perspective</span>: <span class="number">1000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>持续更新中…</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/11/01/FormData Blob ArrayBuffer/">
+        <span class="nav-arrow">← </span>
+        
+          FromData Blob ArrayBuffer
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="nav">none</ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/11/11/移动端开发中遇到的问题整理/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "移动端开中遇到的问题整理",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/11/11/移动端开发中遇到的问题整理/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 <span style="font-size:13px;">蜀ICP备17017451号</span> | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <span id="busuanzi_container_site_uv" style="font-size: 13px;">
+      本站总访问量<span id="busuanzi_value_site_uv" style="color:#42b983"></span>次
+    </span>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
