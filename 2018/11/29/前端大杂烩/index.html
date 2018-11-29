@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="个人博客、前端技术分享、javascript、vue">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      前端大杂烩 | JH
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <style>
+  .menu-author-wrap {
+    width: 100%;
+    height: 200px;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: center;
+    color: #fff;
+    position: relative;
+  }
+  .menu-author-wrap .menu-author-wrap-bg {
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+  }
+  .menu-author-wrap-img {
+    padding-top: 10%;
+  }
+  .menu-author-wrap img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #9e9d9d;
+  }
+  .menu-author-wrap h3{
+    margin: 5px 0
+  }
+  .menu-author-wrap .description {
+    font-size: 12px;
+    color: #de9898;
+  }
+  .menu-list li {
+    padding: 0;
+    text-align: left;
+  }
+  .menu-list .menu-link {
+    display: block;
+    padding: 10px 0px 10px 15px;
+  }
+</style>
+<header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>JH</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask-level"></div>
+    <div class="menu-mask">
+      <div class="menu-author-wrap">
+          <div class="menu-author-wrap-bg" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+          <div class="menu-author-wrap-img">
+            <img src="https://avatars2.githubusercontent.com/u/16866569?v=4" />
+          </div>
+          <h3>Xiaoai</h3>
+          <p class="description">Whatever is worth doing is worth doing well</p>
+          <p class="description">风雪是你,平淡是你;清贫是你,荣华是你;心底温柔是你,目光所至也是你@hui</p>
+          <a href="mailto:xiaoai7904@gmail.com">xiaoai7904@gmail.com</a>
+      </div>
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>前端大杂烩</h2>
+  <p class="post-date">2018-11-29<span style="font-size: 13px;">&nbsp;&nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"></span></span></p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>整理目前github上面比较优秀和热门的项目,文章，方便查看和学习<br><a id="more"></a></p>
+<blockquote>
+<p>提示 —&gt; 项目star数量是更新当天的值没有进行实时更新</p>
+</blockquote>
+<h4 id="2018-11-29更新"><a href="#2018-11-29更新" class="headerlink" title="2018-11-29更新"></a>2018-11-29更新</h4><p><a href="https://github.com/vuejs/vue?utm_source=gold_browser_extension" target="_blank" rel="noopener">Vue</a>  用于构建用户界面的渐进式框架<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">120,527</i></span></p>
+<p><a href="https://github.com/facebook/react?utm_source=gold_browser_extension" target="_blank" rel="noopener">React</a>  <code>Facebook</code>出品,用于构建用户界面的<code>JS</code>库 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">116,570</i></span></p>
+<p><a href="https://github.com/nodejs/node?utm_source=gold_browser_extension" target="_blank" rel="noopener">Node</a>  基于V8引擎的javascript runtime  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">55,887</i></span></p>
+<p><a href="https://github.com/axios/axios?utm_source=gold_browser_extension" target="_blank" rel="noopener">axios</a> 利用Promise编写的HTTP客服端  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">51,713</i></span></p>
+<p><a href="https://github.com/GoogleChrome/puppeteer?utm_source=gold_browser_extension" target="_blank" rel="noopener">puppeteer</a> 谷歌维护<code>Node</code>库,它提供了一个高级API来控制DevTools协议上的Chrome或Chromium,可以用着前端自动化测试,爬虫等<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">41,592</i></span></p>
+<p><a href="https://github.com/NervJS/taro?utm_source=gold_browser_extension" target="_blank" rel="noopener">NervJs/taro</a>  多端统一开发框架，支持用 <code>React</code>的开发方式编写一次代码，生成能运行在微信小程序/百度智能小程序/支付宝小程序、H5、React Native 等的应用 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">11,676</i></span></p>
+<p><a href="https://github.com/Tencent/omi?utm_source=gold_browser_extension" target="_blank" rel="noopener">Omi</a> 腾讯出品，4kb JavaScript中的下一代Web框架（Web Components + JSX + Proxy + Store + Path Updating),易于MVVM   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">5,956</i></span></p>
+<p><a href="https://github.com/knsv/mermaid?utm_source=gold_browser_extension" target="_blank" rel="noopener">Mermaid</a> 一个生成流程图的工具   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">20,724</i></span></p>
+<p><a href="https://github.com/pcottle/learnGitBranching?utm_source=gold_browser_extension" target="_blank" rel="noopener">learnGitBranching</a> 在线学git命令的使用,一个交互式的git可视化来挑战和学习   <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">8,854</i></span></p>
+<p><a href="https://github.com/bvaughn/progress-estimator?utm_source=gold_browser_extension" target="_blank" rel="noopener">progress-estimator</a> 记录进度条并估算Promise完成所需的时间  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">876</i></span></p>
+<p><a href="https://github.com/dominictarr/event-stream?utm_source=gold_browser_extension" target="_blank" rel="noopener">event-stream</a>  EventStream is like functional programming meets IO <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">1,978</i></span></p>
+<p><a href="https://github.com/30-seconds/30-seconds-of-code?utm_source=gold_browser_extension" target="_blank" rel="noopener">30-seconds-of-code</a>  精选的有用JavaScript代码段集合，您可以在30秒或更短的时间内理解这些代码段 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">33,078</i></span></p>
+<p><a href="https://github.com/codrops/ImageRevealHover?utm_source=gold_browser_extension" target="_blank" rel="noopener">ImageRevealHover</a>  一组链接悬停效果，以不同的创作方式显示缩略图 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">93</i></span></p>
+<p><a href="https://github.com/developit/htm?utm_source=gold_browser_extension" target="_blank" rel="noopener">htm</a>  使用标准标记模板的JSX替代方案，具有编译器支持 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">2,920</i></span></p>
+<p><a href="https://github.com/airbnb/javascript?utm_source=gold_browser_extension" target="_blank" rel="noopener">airbnb/javascript</a>  javascript代码规范和es-lint相关配置 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">79,010</i></span></p>
+<p><a href="https://github.com/airbnb/javascript?utm_source=gold_browser_extension" target="_blank" rel="noopener">document-library</a>  jsliang 的文档库. 里面包含了所有的前端文章，例如 vue、react,、angular、微信小程序、设计模式等…… <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">206</i></span></p>
+<p><a href="https://github.com/Meituan-Dianping/mpvue" target="_blank" rel="noopener">mpvue</a>  基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">14,546</i></span></p>
+<p><a href="https://github.com/ElemeFE/element" target="_blank" rel="noopener">element-ui</a>  基于 Vue 2.0 桌面ui库<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">32,941</i></span></p>
+<p><a href="https://github.com/iview/iview" target="_blank" rel="noopener">iview</a>  基于 Vue 2.0 桌面ui库<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">18,561</i></span></p>
+<p><a href="https://github.com/vuejs/awesome-vue#components--libraries" target="_blank" rel="noopener">awesome-vue</a>  基于<code>Vue</code>优秀插件集合<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>Star:</em><i style="font-size:18px;font-style:normal">39,946</i></span></p>
+<p>持续更新…</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#javascript" >
+    <span class="tag-code">javascript</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/11/11/移动端开发中遇到的问题整理/">
+        <span class="nav-arrow">← </span>
+        
+          移动端开中遇到的问题整理
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2018-11-29更新"><span class="toc-nav-text">2018-11-29更新</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://www.anjiecc.cn/2018/11/29/前端大杂烩/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "anjiecc";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "前端大杂烩",
+        owner: "anjiecc",
+        repo: "anjiecc.github.io",
+        oauth: {
+          client_id: "03cc16ea3e36613803ae",
+          client_secret: "ad41577b505b4906cf211c1b9dbfd77d9c9cbb44"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = '';
+  
+  var disqus_url = 'http://www.anjiecc.cn/2018/11/29/前端大杂烩/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2017 - 2018 <span style="font-size:13px;">蜀ICP备17017451号</span> | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    <span id="busuanzi_container_site_uv" style="font-size: 13px;">
+      本站总访问量<span id="busuanzi_value_site_uv" style="color:#42b983"></span>次
+    </span>
+    <!-- Theme by <a href="https://github.com/yanm1ng">yanm1ng</a> -->
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
