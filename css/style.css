@@ -227,7 +227,7 @@ h2.article-head {
   float: left;
 }
 .money-like .money-code .alipay-code .code-image {
-  background-image: url("images/alipay.jpg");
+  background-image: url("");
   background-size: contain;
   background-repeat: no-repeat;
   width: 4.5em;
@@ -237,7 +237,7 @@ h2.article-head {
   float: right;
 }
 .money-like .money-code .wechat-code .code-image {
-  background-image: url("images/wechat.jpg");
+  background-image: url("");
   background-size: contain;
   background-repeat: no-repeat;
   width: 4.5em;
@@ -424,15 +424,24 @@ h2.article-head {
 .menu-mask {
   display: none;
   position: fixed;
-  left: 0;
-  top: 52px;
+/*left: 0*/
+/*top: 52px*/
   z-index: 99;
   width: 100%;
   overflow: hidden;
-  max-height: 0;
+/*max-height: 0*/
   background: rgba(255,255,255,0.98);
-  -webkit-transition: max-height 0.2s ease;
-  transition: max-height 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  text-align: right;
+  width: 50%;
+  box-shadow: 1px 1px 15px #d9d9d9;
+  transform: translateX(-100%);
 }
 @media screen and (max-width: 480px) {
   .menu-mask {
@@ -440,8 +449,22 @@ h2.article-head {
   }
 }
 .open {
-  max-height: 300px;
   transition-delay: 0.1s;
+  transform: translateX(0);
+}
+.menu-mask-level.open-mask {
+  max-width: 100%;
+}
+.menu-mask-level {
+  max-width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  transition: all 0.1s ease;
+  -webkit-transition: all 0.1s ease;
 }
 .menu-list {
   padding: 0;
